@@ -1,0 +1,5 @@
+fio=input("ФИО: ")
+FIO=fio.split()
+k=len(fio)
+print(f"Иницыалы: {FIO[0][0]}{FIO[1][0]}{FIO[2][0]}.")
+print(f"Длина (символов): {k}")
