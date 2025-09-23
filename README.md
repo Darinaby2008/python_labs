@@ -22,6 +22,17 @@ print("Сумма:",round(sum,2),"Среднее:",round(avg,2))
 <img width="729" height="705" alt="image" src="https://github.com/user-attachments/assets/e215004b-92b6-4bb1-a289-fc7ac28fdfb4" />
 
 ## Задание №3
+<pre><code>
+price=int(input("Исходная цена: "))
+discount=int(input("Скидка(%): "))
+vat=int(input("НДС(%): "))
+base=price*(1-discount/100)
+vat_amount=base*(vat/100)
+total=base+vat_amount
+print(f"База после скидки: {base:.2f}₽")
+print(f"НДС: {vat_amount:.2f}₽")
+print(f"Итого к оплате: {total:.2f}₽")
+</code></pre>
 <img width="1280" height="287" alt="image" src="https://github.com/user-attachments/assets/19b111ea-b8e1-406a-8f3a-d820d59bbe82" />
 
 ## Задание №4
