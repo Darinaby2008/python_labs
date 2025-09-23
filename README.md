@@ -9,7 +9,7 @@ print("Привет,",name,"! Через год тебе будет", age+1,".")
 
 ## Задание №2
 <pre><code>
-  a=(input("a: "))
+a=(input("a: "))
 b=(input("b: "))
 a=a.replace(",",".",1)
 b=b.replace(",",".",1)
