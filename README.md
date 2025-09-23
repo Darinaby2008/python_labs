@@ -12,13 +12,15 @@
 <img width="668" height="552" alt="image" src="https://github.com/user-attachments/assets/816b774f-0237-405f-ab6c-05c8797867e5" />
 
 ## Задание №5
-'''fio=input("ФИО: ")
+<pre><code>
+fio=input("ФИО: ")
 fio_clean=' '.join(fio.split())
 k=len(fio_clean)
 FIO=fio.split()
 
 print(f"Иницыалы: {FIO[0][:1]}{FIO[1][:1]}{FIO[2][:1]}.")
-print(f"Длина (символов): {k}")'''
+print(f"Длина (символов): {k}")
+</code></pre>
 <img width="818" height="472" alt="image" src="https://github.com/user-attachments/assets/e3e23107-7ba4-409c-905a-b6dd1c10e04d" />
 
 
