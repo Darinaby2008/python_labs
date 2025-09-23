@@ -8,6 +8,17 @@ print("Привет,",name,"! Через год тебе будет", age+1,".")
 <img width="758" height="346" alt="image" src="https://github.com/user-attachments/assets/1d732caf-6b5f-4c40-a1c6-96ad3e0c2c32" />
 
 ## Задание №2
+<pre><code>
+  a=(input("a: "))
+b=(input("b: "))
+a=a.replace(",",".",1)
+b=b.replace(",",".",1)
+a=float(a)
+b=float(b)
+sum=a+b
+avg=(a+b)/2
+print("Сумма:",round(sum,2),"Среднее:",round(avg,2))
+</pre></code>
 <img width="729" height="705" alt="image" src="https://github.com/user-attachments/assets/e215004b-92b6-4bb1-a289-fc7ac28fdfb4" />
 
 ## Задание №3
