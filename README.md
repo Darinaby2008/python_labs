@@ -12,7 +12,7 @@
 <img width="668" height="552" alt="image" src="https://github.com/user-attachments/assets/816b774f-0237-405f-ab6c-05c8797867e5" />
 
 ## Задание №5
-### fio=input("ФИО: ")
+fio=input("ФИО: ")
 fio_clean=' '.join(fio.split())
 k=len(fio_clean)
 FIO=fio.split()
