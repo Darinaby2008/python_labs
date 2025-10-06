@@ -13,7 +13,7 @@ print(min_max([-5, -2, -9]))
 print(min_max([]))
 print(min_max([1.5, 2, 2.0, -3.1]))
 </code></pre>  
-<![Uploading image.png…]()>
+<![01_arrays_min_max](https://github.com/user-attachments/assets/d0e94327-bb24-4a47-b1e5-b03d4ed6a69e)>
 
 
 
