@@ -46,7 +46,19 @@ print(flatten([[1, 2], "ab"]))
 # Задание B - matrix.py
 # transpose
 <pre><code>
+</code></pre>
 
+# row_sums
+<pre><code>
+</code></pre>
+
+# col_sums
+<pre><code>
+</code></pre>
+
+# Задание C - tuples.py
+<pre><code>
+</code></pre>
 
 
 # Лабораторная работа №1
