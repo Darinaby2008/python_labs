@@ -26,6 +26,23 @@ print(unique_sorted([-1, -1, 0, 2, 2]))
 print(unique_sorted([1.0, 1, 2.5, 2.5, 0]))
 </code></pre>
 ![01_arrays_unique_sorted](https://github.com/user-attachments/assets/c11e1f92-c961-4927-b300-b164200e0a5b)
+## flatten.py
+<pre><code>
+def flatten(mat: list[list | tuple]) -> list:
+    a=[]
+    for i in mat:
+        for j in i:
+            if str(j) in "0123456789":
+                a.append(j)
+            else:
+                return "TypeError"    
+    return a
+print(flatten([[1, 2], [3, 4]]))
+print(flatten(([1, 2], (3, 4, 5))))
+print(flatten([[1], [], [2, 3]]))
+print(flatten([[1, 2], "ab"]))
+</code></pre>
+![01_arrays_flatten](https://github.com/user-attachments/assets/356844c7-cd76-43c3-ad52-1b1bc3711521)
 
 
 
