@@ -13,7 +13,7 @@ print(min_max([-5, -2, -9]))
 print(min_max([]))
 print(min_max([1.5, 2, 2.0, -3.1]))
 </code></pre>  
-
+https://github.com/Darinaby2008/python_labs/blob/main/images/lab02/01_arrays_min_max.jpg
 
 
 
