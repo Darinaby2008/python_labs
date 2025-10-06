@@ -1,11 +1,11 @@
 # Лабораторная работа №2
 ## Задание №1 - arrays.py
-min_max.py
+## min_max.py
 <pre><code>
-a=[] 
-def min_max(n): 
-    if n==a: return "ValueError" 
-    return min(n), max(n) 
+def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
+    if not nums:
+        return 'ValueError'
+    return (min(nums), max(nums))
 
 print(min_max([3, -1, 5, 5, 0]))
 print(min_max([42]))
@@ -13,8 +13,18 @@ print(min_max([-5, -2, -9]))
 print(min_max([]))
 print(min_max([1.5, 2, 2.0, -3.1]))
 </code></pre>  
-![01_arrays_min_max](https://github.com/user-attachments/assets/d0e94327-bb24-4a47-b1e5-b03d4ed6a69e)
+<img width="855" height="638" alt="image" src="https://github.com/user-attachments/assets/b1635522-562d-4ca9-a9f5-bff459afeb6b" />
 
+## unique_sorted.py
+<pre><code>
+def unique_sorted(nums: list[float | int]) -> list[float | int]:
+    return sorted(set(nums))
+
+print(unique_sorted([3, 1, 2, 1, 3]))
+print(unique_sorted([]))
+print(unique_sorted([-1, -1, 0, 2, 2]))
+print(unique_sorted([1.0, 1, 2.5, 2.5, 0]))
+</code></pre>
 
 
 
