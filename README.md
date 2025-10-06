@@ -1,4 +1,4 @@
-<img width="855" height="638" alt="image" src="https://github.com/user-attachments/assets/b1635522-562d-4ca9-a9f5-bff459afeb6b" /># Лабораторная работа №2
+# Лабораторная работа №2
 ## Задание №1 - arrays.py
 min_max.py
 <pre><code>
@@ -13,7 +13,7 @@ print(min_max([-5, -2, -9]))
 print(min_max([]))
 print(min_max([1.5, 2, 2.0, -3.1]))
 </code></pre>  
-https://github.com/Darinaby2008/python_labs/blob/main/images/lab02/01_arrays_min_max.jpg
+<img width="855" height="638" alt="image" src="https://github.com/user-attachments/assets/b1635522-562d-4ca9-a9f5-bff459afeb6b" />
 
 
 
