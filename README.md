@@ -1,5 +1,5 @@
 # Лабораторная работа №2
-## Задание №1 - arrays.py
+## Задание A - arrays.py
 ## min_max
 <pre><code>
 def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
@@ -43,7 +43,7 @@ print(flatten([[1], [], [2, 3]]))
 print(flatten([[1, 2], "ab"]))
 </code></pre>
 ![01_arrays_flatten](https://github.com/user-attachments/assets/356844c7-cd76-43c3-ad52-1b1bc3711521)
-# Задание №2 - matrix.py
+# Задание B - matrix.py
 # transpose
 <pre><code>
 
