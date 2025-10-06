@@ -25,7 +25,8 @@ print(unique_sorted([]))
 print(unique_sorted([-1, -1, 0, 2, 2]))
 print(unique_sorted([1.0, 1, 2.5, 2.5, 0]))
 </code></pre>
-https://github.com/Darinaby2008/python_labs/blob/main/images/lab02/01_arrays_unique_sorted.jpg?raw=true
+![01_arrays_unique_sorted](https://github.com/user-attachments/assets/c11e1f92-c961-4927-b300-b164200e0a5b)
+
 
 
 # Лабораторная работа №1
