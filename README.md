@@ -15,7 +15,16 @@ print(min_max([1.5, 2, 2.0, -3.1]))
 </code></pre>  
 <img width="855" height="638" alt="image" src="https://github.com/user-attachments/assets/b1635522-562d-4ca9-a9f5-bff459afeb6b" />
 
+unique_sorted.py
+<pre><code>
+def unique_sorted(nums: list[float | int]) -> list[float | int]:
+    return sorted(set(nums))
 
+print(unique_sorted([3, 1, 2, 1, 3]))
+print(unique_sorted([]))
+print(unique_sorted([-1, -1, 0, 2, 2]))
+print(unique_sorted([1.0, 1, 2.5, 2.5, 0]))
+</code></pre>
 
 
 
