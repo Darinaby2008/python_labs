@@ -128,11 +128,9 @@ def format_record(student: tuple[str, str, float]) -> str:
     if len(fio_parts) < 2:
         return "ValueError: ФИО должно содержать фамилию и имя"
     
-    
     fio_parts = [part.strip() for part in fio_parts if part.strip()]
     
     res = fio_parts[0].title() + " " + fio_parts[1][0].upper()  
-    
    
     if len(fio_parts) == 3:
         res += "." + fio_parts[2][0].upper() + "., "  
