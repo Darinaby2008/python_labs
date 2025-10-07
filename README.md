@@ -29,20 +29,21 @@ print(unique_sorted([1.0, 1, 2.5, 2.5, 0]))
 ## flatten
 <pre><code>
 def flatten(mat: list[list | tuple]) -> list:
-    a=[]
-    for i in mat:
-        for j in i:
-            if str(j) in "0123456789":
-                a.append(j)
-            else:
-                return "TypeError"    
+    a = []
+    for container in mat:
+        if not isinstance(container, (list, tuple)):
+            return TypeError
+        for item in container:
+            a.append(item)
     return a
+
 print(flatten([[1, 2], [3, 4]]))
 print(flatten(([1, 2], (3, 4, 5))))
 print(flatten([[1], [], [2, 3]]))
 print(flatten([[1, 2], "ab"]))
 </code></pre>
-![01_arrays_flatten](https://github.com/user-attachments/assets/356844c7-cd76-43c3-ad52-1b1bc3711521)
+![01_arrays_flatten](https://github.com/user-attachments/assets/9fb0666c-a324-4c25-8708-963256d2d096)
+
 # Задание B - matrix.py
 # transpose
 <pre><code>
