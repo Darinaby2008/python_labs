@@ -117,28 +117,28 @@ print(col_sums([[1, 2], [3]]))
 # Задание C - tuples.py
 <pre><code>
 def format_record(student: tuple[str, str, float]) -> str:
-    if len(student) != 3: #проверяем, что ровно 3 элемента в кортеже
+    if len(student) != 3: 
         return "ValueError"
     
     if not (isinstance(student[0], str) and isinstance(student[1], str) and isinstance(student[2], float)): #проверяем, что именно 1-фио, 2-группа,3-GPA.
         return "TypeError"
 
-    fio_parts = student[0].split() # Разделяем ФИО на части
+    fio_parts = student[0].split() 
     
     if len(fio_parts) < 2:
         return "ValueError: ФИО должно содержать фамилию и имя"
     
-    # Очищаем от лишних пробелов и формируем фамилию и имя
+    
     fio_parts = [part.strip() for part in fio_parts if part.strip()]
     
-    res = fio_parts[0].title() + " " + fio_parts[1][0].upper() # Формируем фамилию и первую букву имени с большой буквы
+    res = fio_parts[0].title() + " " + fio_parts[1][0].upper()  
     
-    # Добавляем инициалы отчества, если оно есть
+   
     if len(fio_parts) == 3:
         res += "." + fio_parts[2][0].upper() + "., "  
         res += "., "  
 
-    res += "гр. " + student[1] + ", GPA " + f"{round(student[2],2):.2f}" #соединяем все в одно и округляем
+    res += "гр. " + student[1] + ", GPA " + f"{round(student[2],2):.2f}" 
     return res 
 
 print(format_record(("Иванов Иван Иванович","BIVT-25",4.6)))
