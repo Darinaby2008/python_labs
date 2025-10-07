@@ -68,7 +68,7 @@ print(transpose([[1, 2], [3, 4]]))
 print(transpose([]))
 print(transpose([[1, 2], [3]]))
 </code></pre>
-
+![matrix_transpose](https://github.com/user-attachments/assets/6dc14cf2-e439-47d4-a83f-701398b16cc4)
 # row_sums
 <pre><code>
 def row_sums(mat: list[list[float | int]]) -> list[float]:
@@ -91,7 +91,7 @@ print(row_sums([[-1, 1], [10, -10]]))
 print(row_sums([[0, 0], [0, 0]]))
 print(row_sums([[1, 2], [3]]))
 </code></pre>
-
+![matrix_row_sums](https://github.com/user-attachments/assets/e646e50a-154a-4437-8d0d-438c3da03a4b)
 # col_sums
 <pre><code>
 </code></pre>
