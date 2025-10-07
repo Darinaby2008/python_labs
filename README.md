@@ -68,7 +68,7 @@ print(transpose([[1, 2], [3, 4]]))
 print(transpose([]))
 print(transpose([[1, 2], [3]]))
 </code></pre>
-
+![matrix_transpose](https://github.com/user-attachments/assets/6dc14cf2-e439-47d4-a83f-701398b16cc4)
 # row_sums
 <pre><code>
 def row_sums(mat: list[list[float | int]]) -> list[float]:
@@ -91,15 +91,33 @@ print(row_sums([[-1, 1], [10, -10]]))
 print(row_sums([[0, 0], [0, 0]]))
 print(row_sums([[1, 2], [3]]))
 </code></pre>
-
+![matrix_row_sums](https://github.com/user-attachments/assets/e646e50a-154a-4437-8d0d-438c3da03a4b)
 # col_sums
 <pre><code>
 </code></pre>
 
 # Задание C - tuples.py
 <pre><code>
+def col_sums(mat):
+    if not mat:
+        return [] 
+    n = len(mat[0])
+    for row in mat:
+        if len(row) != n:
+            return "ValueError"  
+    res = []  
+    for j in range(n):  
+        k = 0  
+        for i in range(len(mat)):  
+            k += mat[i][j] 
+        res.append(k)  
+    return res 
+print(col_sums([[1, 2, 3], [4, 5, 6]]))
+print(col_sums([[-1, 1], [10, -10]]))
+print(col_sums([[0, 0], [0, 0]]))
+print(col_sums([[1, 2], [3]]))
 </code></pre>
-
+![matrix_col_sums](https://github.com/user-attachments/assets/4086dd06-95f8-4fb6-aed3-78449d695c60)
 
 # Лабораторная работа №1
 ## Задание №1
