@@ -94,10 +94,6 @@ print(row_sums([[1, 2], [3]]))
 ![matrix_row_sums](https://github.com/user-attachments/assets/e646e50a-154a-4437-8d0d-438c3da03a4b)
 # col_sums
 <pre><code>
-</code></pre>
-
-# Задание C - tuples.py
-<pre><code>
 def col_sums(mat):
     if not mat:
         return [] 
@@ -118,6 +114,11 @@ print(col_sums([[0, 0], [0, 0]]))
 print(col_sums([[1, 2], [3]]))
 </code></pre>
 ![matrix_col_sums](https://github.com/user-attachments/assets/4086dd06-95f8-4fb6-aed3-78449d695c60)
+# Задание C - tuples.py
+<pre><code>
+
+</code></pre>
+
 
 # Лабораторная работа №1
 ## Задание №1
