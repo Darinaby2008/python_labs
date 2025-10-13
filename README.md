@@ -21,10 +21,21 @@ print(normalize("ёжик, Ёлка"))
 print(normalize("Hello\r\nWorld"))
 print(normalize("  двойные   пробелы  "))
 </code></pre>
-
+![normalized](https://github.com/user-attachments/assets/18dacafc-58af-4c25-87b1-529aeee0f2d1)
 ## tokenize
 <pre><code>
+import re
 
+def tokenize(text: str) -> list[str]:
+    pattern = r'\w+(?:-\w+)*'
+    tokens  = re.findall(pattern, text)
+    return tokens
+
+print(tokenize("привет мир"))
+print(tokenize("hello,world!!!"))
+print(tokenize("по-настоящему круто"))
+print(tokenize("2025 год"))
+print(tokenize("emoji 😀 не слово"))
 </code></pre>
 
 ## count_freq
