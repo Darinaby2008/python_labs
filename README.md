@@ -1,3 +1,31 @@
+# Лабораторная работа №3
+## Задание А - src/lib/text.py
+## normalize
+<pre><code>
+
+</code></pre>
+
+## tokenize
+<pre><code>
+
+</code></pre>
+
+## count_freq
+<pre><code>
+
+</code></pre>
+
+## top_n
+<pre><code>
+
+</code></pre>
+
+## Задание В - src/text_stats.py
+<pre><code>
+
+</code></pre>
+
+
 # Лабораторная работа №2
 ## Задание A - arrays.py
 ## min_max
