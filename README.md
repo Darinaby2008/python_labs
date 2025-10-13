@@ -37,7 +37,7 @@ print(tokenize("по-настоящему круто"))
 print(tokenize("2025 год"))
 print(tokenize("emoji 😀 не слово"))
 </code></pre>
-
+![tokenize](https://github.com/user-attachments/assets/066308b7-0058-4722-83d1-cdbcc25cd3fa)
 ## count_freq
 <pre><code>
 
