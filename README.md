@@ -1,3 +1,48 @@
+# Лабораторная работа №3
+## Задание А - src/lib/text.py
+## normalize
+<pre><code>
+import re
+
+def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
+    if casefold:
+         text = text.casefold()
+    else: text
+    if yo2e:
+        text = text.replace('ё','е').replace('Ё','Е') 
+    else: text
+    text = text.strip()
+    text = re.sub(r'[\t\r\x00-\x1f\x7F]', ' ', text) 
+    text = ' '.join(text.split())
+    return text
+
+print(normalize("ПрИвЕт\nМИр\t"))
+print(normalize("ёжик, Ёлка"))
+print(normalize("Hello\r\nWorld"))
+print(normalize("  двойные   пробелы  "))
+</code></pre>
+
+## tokenize
+<pre><code>
+
+</code></pre>
+
+## count_freq
+<pre><code>
+
+</code></pre>
+
+## top_n
+<pre><code>
+
+</code></pre>
+
+## Задание В - src/text_stats.py
+<pre><code>
+
+</code></pre>
+
+
 # Лабораторная работа №2
 ## Задание A - arrays.py
 ## min_max
@@ -117,28 +162,26 @@ print(col_sums([[1, 2], [3]]))
 # Задание C - tuples.py
 <pre><code>
 def format_record(student: tuple[str, str, float]) -> str:
-    if len(student) != 3: #проверяем, что ровно 3 элемента в кортеже
+    if len(student) != 3: 
         return "ValueError"
     
-    if not (isinstance(student[0], str) and isinstance(student[1], str) and isinstance(student[2], float)): #проверяем, что именно 1-фио, 2-группа,3-GPA.
+    if not (isinstance(student[0], str) and isinstance(student[1], str) and isinstance(student[2], float)): 
         return "TypeError"
 
-    fio_parts = student[0].split() # Разделяем ФИО на части
+    fio_parts = student[0].split() 
     
     if len(fio_parts) < 2:
         return "ValueError: ФИО должно содержать фамилию и имя"
     
-    # Очищаем от лишних пробелов и формируем фамилию и имя
     fio_parts = [part.strip() for part in fio_parts if part.strip()]
     
-    res = fio_parts[0].title() + " " + fio_parts[1][0].upper() # Формируем фамилию и первую букву имени с большой буквы
-    
-    # Добавляем инициалы отчества, если оно есть
+    res = fio_parts[0].title() + " " + fio_parts[1][0].upper()  
+   
     if len(fio_parts) == 3:
         res += "." + fio_parts[2][0].upper() + "., "  
         res += "., "  
 
-    res += "гр. " + student[1] + ", GPA " + f"{round(student[2],2):.2f}" #соединяем все в одно и округляем
+    res += "гр. " + student[1] + ", GPA " + f"{round(student[2],2):.2f}" 
     return res 
 
 print(format_record(("Иванов Иван Иванович","BIVT-25",4.6)))
@@ -147,7 +190,7 @@ print(format_record(("Петров Пётр Петрович", "IKBO-12", 5.0)))
 print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.999)))
 print(format_record(("Иванов Иван Иванович","BIVT-25", 4.5))) 
 </code></pre>
-
+![typles](https://github.com/user-attachments/assets/e7ce9b88-dc29-44c5-af1a-4c3e3208b630)
 
 # Лабораторная работа №1
 ## Задание №1
