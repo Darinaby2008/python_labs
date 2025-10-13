@@ -37,12 +37,21 @@ print(tokenize("по-настоящему круто"))
 print(tokenize("2025 год"))
 print(tokenize("emoji 😀 не слово"))
 </code></pre>
-
+![tokenize](https://github.com/user-attachments/assets/066308b7-0058-4722-83d1-cdbcc25cd3fa)
 ## count_freq
 <pre><code>
+import re
 
+def count_freq(tokens: list[str]) -> dict[str, int]:
+    unique_words = list(set(tokens))
+    list_count = [tokens.count(i) for i in unique_words]
+    dict_count = {key: word for key, word in list(zip(unique_words, list_count))}
+    return dict_count
+
+print(count_freq(["a","b","a","c","b","a"]))
+print(count_freq(["bb","aa","bb","aa","cc"]))
 </code></pre>
-
+![tokenize](https://github.com/user-attachments/assets/ff9ea428-53f3-4c4e-a8ab-d6861f66ef8d)
 ## top_n
 <pre><code>
 
