@@ -1,8 +1,7 @@
 # Лабораторная работа №3
 ## Задание А - src/lib/text.py
 ## normalize
-<pre><code>
-import re
+'''import re
 
 def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
     if casefold:
@@ -17,8 +16,7 @@ def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
 print(normalize("ПрИвЕт\nМИр\t"))
 print(normalize("ёжик, Ёлка"))
 print(normalize("Hello\r\nWorld"))
-print(normalize("  двойные   пробелы  "))
-</code></pre>
+print(normalize("  двойные   пробелы  "))'''
 ![normalized](https://github.com/user-attachments/assets/18dacafc-58af-4c25-87b1-529aeee0f2d1)
 ## tokenize
 <pre><code>
