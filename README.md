@@ -57,7 +57,7 @@ import re
 def count_freq(tokens: list[str]) -> dict[str, int]:
     unique_words = list(set(tokens))
     list_count = [tokens.count(i) for i in unique_words]
-    dict_count = {key: word for key, word in list(zip(unique_words, list_count))}
+    dict_count = dict(zip(unique_words, list_count))}
     return dict_count
 
 def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
