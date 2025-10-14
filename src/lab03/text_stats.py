@@ -12,6 +12,6 @@ def stats(text: str) -> None:
         print(f'{cursor[0]}: {cursor[-1]}')
 
 
-text_in = sys.stdin.buffer.read().decode('utf-8')
+text_in = sys.stdin.buffer.read().decode()
 
 stats(text_in)
