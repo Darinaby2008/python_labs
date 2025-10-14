@@ -5,7 +5,6 @@ sys.path.append(r'C:\Users\darin\Documents\GitHub\python_labs\src\lib')
 from text_lib import *
 
 def stats(text: str) -> None:
-    text_in = sys.stdin.buffer.read().decode('utf-8')
     print(f'Всего слов: {len(tokenize(normalize(text)))}')
     print(f'Уникальных слов: {len(count_freq(tokenize(normalize(text))))}')
     print('Топ-5:')
@@ -13,6 +12,6 @@ def stats(text: str) -> None:
         print(f'{cursor[0]}: {cursor[-1]}')
 
 
-#text_in = sys.stdin.buffer.read().decode('utf-8')
+text_in = sys.stdin.buffer.read().decode('utf-8')
 
 stats(text_in)
