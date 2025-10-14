@@ -73,10 +73,27 @@ print(top_n(count_freq(["bb","aa","bb","aa","cc"]),n=2))
 </code></pre>
 ![top_n](https://github.com/user-attachments/assets/afb36419-2727-44df-8c35-78be46ae1b82)
 ## Задание В - src/text_stats.py
+Вводим в PowerShell эту команду для изменения кодировки Windows: $OutputEncoding = [System.Text.Encoding]::UTF8. После вводим строку с которой нужно сделать действие
 <pre><code>
+import sys
 
+sys.path.append(r'C:\Users\darin\Documents\GitHub\python_labs\src\lib')
+
+from text_lib import *
+
+def stats(text: str) -> None:
+    print(f'Всего слов: {len(tokenize(normalize(text)))}')
+    print(f'Уникальных слов: {len(count_freq(tokenize(normalize(text))))}')
+    print('Топ-5:')
+    for cursor in top_n(count_freq(tokenize(normalize(text))))[:5]:
+        print(f'{cursor[0]}: {cursor[-1]}')
+
+
+text_in = sys.stdin.buffer.read().decode('utf-8')
+
+stats(text_in)
 </code></pre>
-
+![text_stats](https://github.com/user-attachments/assets/c3765a52-e1e0-4c3c-99ae-2e5cfdd8bf13)
 
 # Лабораторная работа №2
 ## Задание A - arrays.py
