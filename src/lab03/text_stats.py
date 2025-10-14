@@ -1,8 +1,8 @@
 import sys
 
-sys.path.append(r'C:\Users\darin\Documents\GitHub\python_labs\src\lib')
+sys.path.append(r'C:\Users\darin\Documents\GitHub\python_labs\src\lab03\text.py')
 
-from text_lib import *
+from text import *
 
 def stats(text: str) -> None:
     print(f'Всего слов: {len(tokenize(normalize(text)))}')
