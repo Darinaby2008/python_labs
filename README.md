@@ -7,10 +7,8 @@ import re
 def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
     if casefold:
          text = text.casefold()
-    else: text
     if yo2e:
         text = text.replace('ё','е').replace('Ё','Е') 
-    else: text
     text = text.strip()
     text = re.sub(r'[\t\r\x00-\x1f\x7F]', ' ', text) 
     text = ' '.join(text.split())
@@ -89,7 +87,7 @@ def stats(text: str) -> None:
         print(f'{cursor[0]}: {cursor[-1]}')
 
 
-text_in = sys.stdin.buffer.read().decode('utf-8')
+text_in = sys.stdin.buffer.read().decode()
 
 stats(text_in)
 </code></pre>
