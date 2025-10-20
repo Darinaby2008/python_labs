@@ -17,18 +17,19 @@ def write_csv(rows: Iterable[Sequence], path: str | Path,
     p = Path(path)
     #ensure_parent_dir(p) #Создаем родителькие директории если их нет
     rows = list(rows) #Преобразовали в список
-    with p.open("f_c", newline="", encoding="utf-8") as f:
-        f_c = csv.writer(f)
+    with p.open("w", newline="", encoding="utf-8") as f:
+        file_c = csv.writer(f)
         #if header is not None:
             #f_c.writerow('a','b')
         if header is not None:
-            f_c.writerow(header)
-        if rows != []:
+            file_c.writerow(header)
+        if rows:
             const = len(rows[0])
             for r in rows:
                 if len(r) != const:
                     raise ValueError("Все строки должны иметь одинаковую длину")  
-                f_c.writerow(r)
+            for r in rows:    
+                file_c.writerow(r)
             
 def ensure_parent_dir(path: str | Path) -> None:
     p = Path(path)
@@ -36,4 +37,4 @@ def ensure_parent_dir(path: str | Path) -> None:
     parent_dir.mkdir(parents = True, exist_ok = True)
     
 print(read_text(r"C:\Users\darin\Documents\GitHub\python_labs\date\input.txt"))
-write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv" )
+write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv")
