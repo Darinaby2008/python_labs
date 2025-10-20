@@ -19,8 +19,8 @@ def write_csv(rows: Iterable[Sequence], path: str | Path,
     rows = list(rows) #Преобразовали в список
     with p.open("w", newline="", encoding="utf-8") as f:
         file_c = csv.writer(f)
-        #if header is not None:
-            #f_c.writerow('a','b')
+        if header is not None and rows == []:
+            f_c.writerow(('a','b'))
         if header is not None:
             file_c.writerow(header)
         if rows:
