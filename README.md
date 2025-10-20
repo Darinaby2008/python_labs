@@ -41,7 +41,7 @@ def ensure_parent_dir(path: str | Path) -> None:
 print(read_text(r"C:\Users\darin\Documents\GitHub\python_labs\date\input.txt"))
 write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv")
 </code></pre>
-
+## Задание B - src/lab04/text_report.py
 
 
 # Лабораторная работа №3
