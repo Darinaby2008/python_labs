@@ -15,7 +15,6 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
 def write_csv(rows: Iterable[Sequence], path: str | Path,
               header: tuple[str, ...] | None = None) -> None:
     p = Path(path)
-    #ensure_parent_dir(p) #Создаем родителькие директории если их нет
     rows = list(rows) #Преобразовали в список
     with p.open("w", newline="", encoding="utf-8") as f:
         file_c = csv.writer(f)
