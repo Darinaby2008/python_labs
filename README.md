@@ -1,45 +1,48 @@
 # Лабораторная работа №4
 ## Задание А - src/lab04/io_txt_csv.py
 <pre><code>
-import csv
-import os
-from typing import Iterable, Sequence
+import csv #импортируем встроенную библиотеку для работы с CSV-файлами
+import os #импортируем библиотеку для работы с операционной системой
+from typing import Iterable, Sequence #импортируем типы для подсказки типов(аннотаций)
 
-def read_text(path: str | Path, encoding: str = "utf-8") -> str:
-    try: #попытайся сделать это
-        p = Path(path)
-        return p.read_text(encoding=encoding)
+def read_text(path: str | Path, encoding: str = "utf-8") -> str: #объявляем функцию для чтения текста
+    try: #попытка выполнения кода
+        p = Path(path) #преобразуем путь в объект Path
+        return p.read_text(encoding=encoding) #читаем текст из файла в указанной кодировке и возвращения его
     except FileNotFoundError: #выполни это, в блоке try произошла ошибка
         return "Такого файла не существует"
-    except UnicodeDecodeError: #-*-
+    except UnicodeDecodeError: #выполни это, в блоке try произошла ошибка
         return "Не удалось изменить кодировку"
    
 
 def write_csv(rows: Iterable[Sequence], path: str | Path,
-              header: tuple[str, ...] | None = None) -> None:
-    p = Path(path)
-    rows = list(rows) #Преобразовали в список
-    with p.open("w", newline="", encoding="utf-8") as f:
-        file_c = csv.writer(f)
-        if header is not None and rows == []:
-            f_c.writerow(('a','b'))
-        if header is not None:
+              header: tuple[str, ...] | None = None) -> None: #объявляем функция для перевода в CSV(работа с заголовком)
+    p = Path(path) #преобразуем путь в объект Path
+    rows = list(rows) #Преобразовали объект в список
+    with p.open("w", newline="", encoding="utf-8") as f: #with-гарантирует правильное закрытие файла после работы
+                                                         #открываем файл в режиме записи "w"
+                                                         #newline="" -для корректной работы с переносами строк в CSV
+        file_c = csv.writer(f) #создаем объект writer для записи CSV-данных в открытый файл
+        if header is not None and rows == []: #записывает тестовые данные, если предан заголовок, но нет строк
+            file_c.writerow(('a','b')) 
+        if header is not None: #если заголовок указан, то записывается первой строкой в файл
             file_c.writerow(header)
-        if rows:
+        if rows: #проеряем, что все строки имеют одинаковую количество элементов
             const = len(rows[0])
             for r in rows:
-                if len(r) != const:
+                if len(r) != const: #строки разной длины => ошибка
                     raise ValueError("Все строки должны иметь одинаковую длину")  
-            for r in rows:    
+            for r in rows:  #записываем все строки в CSV-файл  
                 file_c.writerow(r)
             
-def ensure_parent_dir(path: str | Path) -> None:
-    p = Path(path)
-    parent_dir = p.parent
-    parent_dir.mkdir(parents = True, exist_ok = True)
+def ensure_parent_dir(path: str | Path) -> None: #объявляем функцию для создания родительской директории файла
+    p = Path(path) #преобразуем путь в объект Path
+    parent_dir = p.parent #получаем путь к род. директории
+    parent_dir.mkdir(parents = True, exist_ok = True) #создаем директорию со всеми род. директориями если нужно
+                                                      #exist_ok=True- не вызфвает ошибку если директория уже существует
     
 print(read_text(r"C:\Users\darin\Documents\GitHub\python_labs\date\input.txt"))
-write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv", header = None)
+write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv", header = None) #записываем все данные CSV-файл без заголовка
 </code></pre>
 <img width="962" height="425" alt="image" src="https://github.com/user-attachments/assets/7f44c343-b4f7-4196-a6a5-2eed69f45609" />
 <img width="963" height="794" alt="image" src="https://github.com/user-attachments/assets/4e0a5eae-116c-424c-b8a4-4ecf64278113" />
@@ -48,19 +51,16 @@ write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\pyth
 
 ## Задание B - src/lab04/text_report.py
 <pre><code>
-import sys
-sys.path.append(r'C:\Users\darin\Documents\GitHub\python_labs\src\_lib_')
-# импортирует модуль sys, который предоставляет доступ к объектам и функциям
-from lib_text import *
-from io_txt_csv import read_text, write_csv
-from stats import statistics
+import sys #импортируем встроенный модуль, предоставляет доступ к системным параметрам и функциям
+sys.path.append(r'C:\Users\darin\Documents\GitHub\python_labs\src\_lib_') #импортирует модуль sys, который предоставляет доступ к объектам и функциям
+from lib_text import * #импортирует все функции из файла lib_text
+from io_txt_csv import read_text, write_csv #импортирует конкретные функции 
+from stats import statistics #импортирует функцию statistics из модуля stats
 
-input_text = read_text(r'C:\Users\darin\Documents\GitHub\python_labs\date\input_2.txt')
-# читаем текст из указанного файла
-statistics(input_text)
+input_text = read_text(r'C:\Users\darin\Documents\GitHub\python_labs\date\input_2.txt') #читаем текст из указанного файла
+statistics(input_text) #вызываем функцию и передаем ей прочитанный текст 
 
-write_csv(top_n(count_freq(tokenize(normalize(input_text))), 15), path = r'C:\Users\darin\Documents\GitHub\python_labs\date\check_2.csv', header= ['word', 'count'])
-# нормализуем текст, разбиваем на слова, получаем топ-... слов
+write_csv(top_n(count_freq(tokenize(normalize(input_text))), 15), path = r'C:\Users\darin\Documents\GitHub\python_labs\date\check_2.csv', header= ['word', 'count']) #нормализуем текст, разбиваем на слова, получаем топ-15 слов
 </code></pre>
 <img width="1280" height="715" alt="image" src="https://github.com/user-attachments/assets/5981f91c-03da-4cc4-8d32-cd59b2f27921" />
 <img width="306" height="547" alt="image" src="https://github.com/user-attachments/assets/f4d0965f-46e5-43ed-9fda-b00654798930" />
