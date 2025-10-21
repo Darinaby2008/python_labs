@@ -9,9 +9,9 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str: #объявля
     try: #попытка выполнения кода
         p = Path(path) #преобразуем путь в объект Path
         return p.read_text(encoding=encoding) #читаем текст из файла в указанной кодировке и возвращения его
-    except FileNotFoundError: #выполни это, в блоке try произошла ошибка
+    except FileNotFoundError: #выполни это, в блоке try произошла ошибка, файл не найден
         return "Такого файла не существует"
-    except UnicodeDecodeError: #выполни это, в блоке try произошла ошибка
+    except UnicodeDecodeError: #выполни это, в блоке try произошла ошибка, не правильная кодировка
         return "Не удалось изменить кодировку"
    
 
