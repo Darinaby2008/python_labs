@@ -1,5 +1,6 @@
 from pathlib import Path
 import csv
+import os
 from typing import Iterable, Sequence
 
 def read_text(path: str | Path, encoding: str = "utf-8") -> str:
@@ -36,4 +37,4 @@ def ensure_parent_dir(path: str | Path) -> None:
     parent_dir.mkdir(parents = True, exist_ok = True)
     
 print(read_text(r"C:\Users\darin\Documents\GitHub\python_labs\date\input.txt"))
-write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv")
+write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv", header = None)
