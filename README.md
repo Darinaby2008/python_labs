@@ -1,8 +1,8 @@
 # Лабораторная работа №4
 ## Задание А - src/lab04/io_txt_csv.py
 <pre><code>
-from pathlib import Path
 import csv
+import os
 from typing import Iterable, Sequence
 
 def read_text(path: str | Path, encoding: str = "utf-8") -> str:
@@ -39,7 +39,7 @@ def ensure_parent_dir(path: str | Path) -> None:
     parent_dir.mkdir(parents = True, exist_ok = True)
     
 print(read_text(r"C:\Users\darin\Documents\GitHub\python_labs\date\input.txt"))
-write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv")
+write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv", header = None)
 </code></pre>
 <img width="962" height="425" alt="image" src="https://github.com/user-attachments/assets/7f44c343-b4f7-4196-a6a5-2eed69f45609" />
 <img width="963" height="794" alt="image" src="https://github.com/user-attachments/assets/4e0a5eae-116c-424c-b8a4-4ecf64278113" />
@@ -47,7 +47,23 @@ write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\pyth
 <img width="388" height="194" alt="image" src="https://github.com/user-attachments/assets/dbb61d57-3865-4ab7-89b7-c8557ea8710d" />
 
 ## Задание B - src/lab04/text_report.py
+<pre><code>
+import sys
+sys.path.append(r'C:\Users\darin\Documents\GitHub\python_labs\src\_lib_')
+# импортирует модуль sys, который предоставляет доступ к объектам и функциям
+from lib_text import *
+from io_txt_csv import read_text, write_csv
+from stats import statistics
 
+input_text = read_text(r'C:\Users\darin\Documents\GitHub\python_labs\date\input_2.txt')
+# читаем текст из указанного файла
+statistics(input_text)
+
+write_csv(top_n(count_freq(tokenize(normalize(input_text))), 15), path = r'C:\Users\darin\Documents\GitHub\python_labs\date\check_2.csv', header= ['word', 'count'])
+# нормализуем текст, разбиваем на слова, получаем топ-... слов
+</code></pre>
+<img width="1280" height="715" alt="image" src="https://github.com/user-attachments/assets/5981f91c-03da-4cc4-8d32-cd59b2f27921" />
+<img width="306" height="547" alt="image" src="https://github.com/user-attachments/assets/f4d0965f-46e5-43ed-9fda-b00654798930" />
 
 # Лабораторная работа №3
 ## Задание А - src/lib/text.py
