@@ -4,7 +4,7 @@ sys.path.append(r'C:\Users\darin\Documents\GitHub\python_labs\src\_lib_')
 
 from lib_text import tokenize, normalize, count_freq, top_n 
 
-def stats(text: str) -> None:
+def statistics(text: str) -> None:
     print(f'Всего слов: {len(tokenize(normalize(text)))}')
     print(f'Уникальных слов: {len(count_freq(tokenize(normalize(text))))}')
     print('Топ-5:')
@@ -12,6 +12,6 @@ def stats(text: str) -> None:
         print(f'{cursor[0]}: {cursor[-1]}')
 
 
-text_in = sys.stdin.buffer.read().decode()
+# text_in = sys.stdin.buffer.read().decode()
 
-stats(text_in)
+# stats(text_in)
