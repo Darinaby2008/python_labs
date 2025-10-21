@@ -41,6 +41,11 @@ def ensure_parent_dir(path: str | Path) -> None:
 print(read_text(r"C:\Users\darin\Documents\GitHub\python_labs\date\input.txt"))
 write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv")
 </code></pre>
+<img width="962" height="425" alt="image" src="https://github.com/user-attachments/assets/7f44c343-b4f7-4196-a6a5-2eed69f45609" />
+<img width="963" height="794" alt="image" src="https://github.com/user-attachments/assets/4e0a5eae-116c-424c-b8a4-4ecf64278113" />
+<img width="1055" height="182" alt="image" src="https://github.com/user-attachments/assets/f32a8cd6-0f97-4e1b-b654-46dda0d7d067" />
+<img width="388" height="194" alt="image" src="https://github.com/user-attachments/assets/dbb61d57-3865-4ab7-89b7-c8557ea8710d" />
+
 ## Задание B - src/lab04/text_report.py
 
 
