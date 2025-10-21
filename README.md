@@ -62,7 +62,8 @@ statistics(input_text)
 write_csv(top_n(count_freq(tokenize(normalize(input_text))), 15), path = r'C:\Users\darin\Documents\GitHub\python_labs\date\check_2.csv', header= ['word', 'count'])
 # нормализуем текст, разбиваем на слова, получаем топ-... слов
 </code></pre>
-
+<img width="1280" height="715" alt="image" src="https://github.com/user-attachments/assets/5981f91c-03da-4cc4-8d32-cd59b2f27921" />
+<img width="306" height="547" alt="image" src="https://github.com/user-attachments/assets/f4d0965f-46e5-43ed-9fda-b00654798930" />
 
 # Лабораторная работа №3
 ## Задание А - src/lib/text.py
