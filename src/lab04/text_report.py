@@ -1,7 +1,7 @@
 import sys
 sys.path.append(r'C:\Users\darin\Documents\GitHub\python_labs\src\_lib_')
 # импортирует модуль sys, который предоставляет доступ к объектам и функциям
-from lib_text import *
+from lib_text import tokenize, normalize, top_n 
 from io_txt_csv import read_text, write_csv
 from  stats import stats
 
