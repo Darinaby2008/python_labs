@@ -36,5 +36,5 @@ def ensure_parent_dir(path: str | Path) -> None:
     parent_dir = p.parent
     parent_dir.mkdir(parents = True, exist_ok = True)
     
-print(read_text(r"C:\Users\darin\Documents\GitHub\python_labs\date\input.txt"))
-write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv", header = None)
+print(read_text(r"C:\Users\darin\Documents\GitHub\python_labs\date\input_2.txt"))
+write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check_2.csv", header = None)
