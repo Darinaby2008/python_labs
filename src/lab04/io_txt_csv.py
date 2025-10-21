@@ -35,6 +35,20 @@ def ensure_parent_dir(path: str | Path) -> None:
     p = Path(path)
     parent_dir = p.parent
     parent_dir.mkdir(parents = True, exist_ok = True)
+ 
+ def main():
+    txt = read_text("../data/input.txt")
+    print(txt)
+    print()
+    print('пустой файл:', read_text(r"C:\Users\darin\Documents\GitHub\python_labs\date\pustoy.txt"))
     
-print(read_text(r"C:\Users\darin\Documents\GitHub\python_labs\date\input_2.txt"))
-write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check_2.csv", header = None)
+    print(read_text(r"C:\Users\darin\Documents\GitHub\python_labs\date\input.txt"))
+    write_csv([("word","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv") 
+    write_csv(rows=[], path=r"C:\Users\darin\Documents\GitHub\python_labs\date\pustoy.csv", header=None) 
+
+if __name__ == '__main__':
+    main()
+
+    
+# print(read_text(r"C:\Users\darin\Documents\GitHub\python_labs\date\input.txt"))
+# write_csv([("world","count"),("test",3)], r"C:\Users\darin\Documents\GitHub\python_labs\date\check.csv", header = None)
