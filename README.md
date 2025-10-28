@@ -52,8 +52,44 @@ json_to_csv( r"C:\Users\darin\Documents\GitHub\python_labs\date\samples\people.j
 
 ## Задание B - CSV → XLSX
 <pre><code>
-    
+import os
+import csv
+import sys
+
+from openpyxl import Workbook
+
+def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
+    if not os.path.exists(csv_path):
+        print("FileNotFoundError")
+        sys.exit(1)
+
+    if os.path.getsize(csv_path) == 0:
+        print("ValueError")
+        sys.exit(1)
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Sheet1"
+
+    with open(csv_path, "r", encoding="utf-8") as csv_file:
+        reader = csv.reader(csv_file)
+        for row in reader:
+            ws.append(row)
+
+
+    for column_cells in ws.columns:
+        max_length = 0
+        column_letter = column_cells[0].column_letter
+        for cell in column_cells:
+            if cell.value:
+                max_length = max(max_length, len(str(cell.value)))
+        ws.column_dimensions[column_letter].width = max(max_length + 2, 8)
+    wb.save(xlsx_path)
+csv_to_xlsx(r"C:\Users\darin\Documents\GitHub\python_labs\date\samples\cities.csv", r"C:\Users\darin\Documents\GitHub\python_labs\date\out\people.xlsx")    
 </code></pre>
+<img width="901" height="737" alt="image" src="https://github.com/user-attachments/assets/e4fad318-43d9-4124-971a-da09ce552695" />
+<img width="1280" height="275" alt="image" src="https://github.com/user-attachments/assets/856b53ee-f8eb-411c-8b35-8e94c6d38e86" />
+<img width="580" height="212" alt="image" src="https://github.com/user-attachments/assets/1533ea41-aaa3-4368-b5a5-fe7f8cc45bb9" /><img width="522" height="168" alt="image" src="https://github.com/user-attachments/assets/239547f4-ebf7-4b85-a89b-b1844b4ac57b" />
+
 # Лабораторная работа №4
 ## Задание А - src/lab04/io_txt_csv.py
 <pre><code>
