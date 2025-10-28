@@ -45,6 +45,11 @@ csv_to_json(r"C:\Users\darin\Documents\GitHub\python_labs\date\samples\people.cs
 
 json_to_csv( r"C:\Users\darin\Documents\GitHub\python_labs\date\samples\people.json",  r"C:\Users\darin\Documents\GitHub\python_labs\date\out\people_from_json.csv" )    
 </code></pre>
+<img width="1230" height="697" alt="image" src="https://github.com/user-attachments/assets/36555183-9f28-42d4-8dfa-b8cbc6eae1e9" />
+<img width="1280" height="669" alt="image" src="https://github.com/user-attachments/assets/e0959a3f-d1bc-4365-88c8-2ec155e6bcf9" />
+<img width="396" height="184" alt="image" src="https://github.com/user-attachments/assets/bbd51687-10f6-42ab-94b5-3e00902f8a5a" /> <img width="499" height="291" alt="image" src="https://github.com/user-attachments/assets/7c936017-3121-478a-b4d6-c2273b28cb5f" />
+<img width="936" height="244" alt="image" src="https://github.com/user-attachments/assets/1fd2e43e-1b92-4769-93e1-c0b9f65276b1" /> <img width="740" height="168" alt="image" src="https://github.com/user-attachments/assets/b68cdc51-60df-4886-a518-0317d0cbc460" />
+
 ## Задание B - CSV → XLSX
 <pre><code>
     
