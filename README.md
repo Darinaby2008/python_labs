@@ -1,3 +1,12 @@
+# Лабораторная работа №5
+## Задание А - JSON ↔ CSV
+<pre><code>
+    
+</code></pre>
+## Задание B - CSV → XLSX
+<pre><code>
+    
+</code></pre>
 # Лабораторная работа №4
 ## Задание А - src/lab04/io_txt_csv.py
 <pre><code>
