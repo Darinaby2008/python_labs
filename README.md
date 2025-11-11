@@ -89,10 +89,23 @@ import sys
 
 from openpyxl import Workbook #из библиотеки openpyx1 импортирует только класс Workbook для создаия Excel файлов
 
+def check_file_type(file_path: str, valid_types: tuple) -> bool: #функция для проверки типа файла по расширению
+    """
+    Проверяет, соответствует ли расширение файла одному из указанных типов.
+    Возвращает True, если файл имеет одно из разрешенных расширений, иначе False.
+    """
+    return Path(file_path).suffix.lower() in valid_types
+    
 def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None: #функция конвертанции CSV в XLSX
     if not os.path.exists(csv_path): #если не существует файл по указанному пути, то 
         print("FileNotFoundError") #выводит сообщение об ошибке
         sys.exit(1) #завершает программу с кодом ошибки 1
+
+    if not check_file_type(csv_path, ('.csv',)): #проверка расширения входящего файла (должен быть .csv)
+        raise ValueError(f"Входной файл '{csv_path}' не является CSV.")
+
+    if not check_file_type(xlsx_path, ('.xlsx',)):  #проверка расширения выходящего файла (должен быть .xlsx)
+        raise ValueError(f"Выходной файл '{xlsx_path}' не является XLSX.")
 
     if os.path.getsize(csv_path) == 0: #получает размер в байтах и проверяет не равен ли он 0 (пустой файл) 
         print("ValueError")
