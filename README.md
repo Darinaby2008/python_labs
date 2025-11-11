@@ -5,10 +5,29 @@ import csv
 import json
 import sys
 import os
+from pathlib import Path
+
+# Функция для проверки расширения файла
+def check_file_extension(file_path: str, expected_extensions: tuple) -> bool:
+    """
+    Проверяет расширение файла на совпадение с ожидаемым списком расширений.
+    :param file_path: полный путь к файлу
+    :param expected_extensions: кортеж ожидаемых расширений
+    :return: True, если расширение совпадает, иначе False
+    """
+    # Получаем суффикс файла и сравниваем его с ожидаемыми расширениями
+    return any(Path(file_path).suffix.lower().endswith(ext) for ext in expected_extensions)
 
 def json_to_csv(json_path: str, csv_path: str) -> None: #функция конвертанции JSON в CSV
     if not os.path.exists(json_path): #проверяет, существует ли файл по указанному пути
         print("FileNotFoundError") #если не существует выдает ошибку
+   
+    if not check_file_extension(json_path, ('.json',)):  #проверяем расширение входящего файла
+        raise ValueError(f"Входной файл не является JSON.")
+    
+    if not check_file_extension(csv_path, ('.csv',)):   #проверяем расширение выходящего файла
+       raise ValueError(f"Выходной файл не является CSV.")
+    
     if os.path.getsize(json_path) == 0: #получает размер файла в байтах и проверяет, равен ли размер нулю (пустой файл или нет)
         print("ValueError1")
         sys.exit(1) #завершает программу с кодом ошибка 1
@@ -31,6 +50,13 @@ def csv_to_json(csv_path: str, json_path: str) -> None: #функция конв
     if not os.path.exists(csv_path): #проверяет, существует ли файл по указанному пути
         print("FileNotFoundError")  #если не существует выдает ошибку
         sys.exit(1) #завершает программу с кодом ошибка 1
+  
+    if not check_file_extension(csv_path, ('.csv',)): #проверяем расширение входящего файла
+        raise ValueError(f"Входной файл '{csv_path}' не является CSV.")
+
+    if not check_file_extension(json_path, ('.json',)):  #проверяем расширение выходящего файла
+        raise ValueError(f"Выходной файл '{json_path}' не является JSON.")
+    
     if os.path.getsize(csv_path) == 0: #получает размер файла в байтах и проверяет, равен ли размер нулю (пустой файл или нет)
         print("ValueError3")
         sys.exit(1) #завершает программу с кодом ошибка 1
