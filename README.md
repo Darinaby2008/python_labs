@@ -51,7 +51,7 @@ def main():
     stats_parser.add_argument("--input", required=True) #путь к файлу
     stats_parser.add_argument("--top", type=int, default=5) 
 
-    args = parser.parse_args()  #преобразует sys.argv в объект args
+    args = parser.parse_args()  #преобразует в объект args
         
     if args.command == "cat":
         cat_command(args.input, args.n)
@@ -95,7 +95,7 @@ def main():
     p3.add_argument("--in", dest="input", required=True, help="Входной CSV файл")
     p3.add_argument("--out", dest="output", required=True, help="Выходной XLSX файл")
     
-    args = parser.parse_args()  #преобразует sys.argv в объект args
+    args = parser.parse_args()  #преобразует в объект args
 
     
     if args.command == "json2csv":
