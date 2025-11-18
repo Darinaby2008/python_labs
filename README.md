@@ -63,8 +63,10 @@ def main():
 if __name__ == "__main__":
     main()
 </code></pre>
+
 ### Вывод строк и частоты слов
 <img width="1280" height="671" alt="image" src="https://github.com/user-attachments/assets/92a1b47e-d774-44c8-b011-c2846cd11121" />
+
 ## Задание №2 - cli_convert.py
 <pre><code>
 import sys
@@ -128,6 +130,7 @@ def main():
 if __name__ == "__main__":
     main()
 </code></pre>
+
 ### Вывод JSON => CSV
 <img width="1280" height="96" alt="image" src="https://github.com/user-attachments/assets/469e6e8e-2a4f-43e7-b6c4-3b06d4d81652" />
 <img width="531" height="187" alt="image" src="https://github.com/user-attachments/assets/cdb212d9-dd9a-495d-8332-b306998003ac" />
