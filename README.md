@@ -132,10 +132,12 @@ if __name__ == "__main__":
 <img width="1280" height="96" alt="image" src="https://github.com/user-attachments/assets/469e6e8e-2a4f-43e7-b6c4-3b06d4d81652" />
 <img width="531" height="187" alt="image" src="https://github.com/user-attachments/assets/cdb212d9-dd9a-495d-8332-b306998003ac" />
 <img width="404" height="166" alt="image" src="https://github.com/user-attachments/assets/5cacb6f3-ee75-4dd1-bc66-55854fdd9038" />
+
 ### Вывод CSV => JSON
 <img width="1280" height="101" alt="image" src="https://github.com/user-attachments/assets/12779514-88ea-4b57-992e-5565d2123378" />
 <img width="370" height="168" alt="image" src="https://github.com/user-attachments/assets/82b7a77d-e51d-441c-a394-2b2a5c6a5c10" />
 <img width="487" height="251" alt="image" src="https://github.com/user-attachments/assets/fb3b66df-9999-4ccd-a3fd-9d1588e1efe5" />
+
 ### Вывод CSV => XLSX
 <img width="1280" height="88" alt="image" src="https://github.com/user-attachments/assets/7ea5d6ef-729a-4bf3-8d9e-1117f5aa90ff" />
 <img width="504" height="209" alt="image" src="https://github.com/user-attachments/assets/2ff33f23-6e62-48d6-ba89-aaade59acce4" />
