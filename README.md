@@ -6,7 +6,7 @@ import os
 import argparse
 from lib import stats_text
 
-def check_file(file_path: str) -> bool:
+def check_file(file_path: str) -> bool: 
     if not os.path.exists(file_path):
         print(f"Ошибка: файл '{file_path}' не существует", file=sys.stderr)
         return False
