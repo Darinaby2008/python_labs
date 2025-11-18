@@ -6,8 +6,8 @@ import os
 import argparse
 from lib import stats_text
 
-def check_file(file_path: str) -> bool: 
-    if not os.path.exists(file_path):
+def check_file(file_path: str) -> bool: #проверка файла, существует ли он
+    if not os.path.exists(file_path): 
         print(f"Ошибка: файл '{file_path}' не существует", file=sys.stderr)
         return False
     if not os.path.isfile(file_path):
@@ -16,19 +16,19 @@ def check_file(file_path: str) -> bool:
     return True
 
 def cat_command(input_file: str, number_lines: bool = False):
-    if not check_file(input_file):
+    if not check_file(input_file): #проверка файла
         sys.exit(1)
         
     with open(input_file, 'r', encoding='utf-8') as f:
-        for i, line in enumerate(f, 1): 
-            if number_lines:
-                print(f"{i:6d}  {line}", end='') 
+        for i, line in enumerate(f, 1): #нумеруем строки
+            if number_lines: #если включена нумерация строк
+                print(f"{i:6d}  {line}", end='') #то выводим номера строк(макс длиной 6 символов) и содержимое строки
             else:
-                print(line, end='') 
+                print(line, end='') #если нет, то выводим строку без номера
     
 
 def stats_command(input_file: str, top_n: int = 5):
-    if not check_file(input_file): 
+    if not check_file(input_file): #проверка файла
         sys.exit(1)
     
     if top_n <= 0:
@@ -36,7 +36,7 @@ def stats_command(input_file: str, top_n: int = 5):
         sys.exit(1)
     
     with open(input_file, 'r', encoding='utf-8') as f:
-        text = f.read()
+        text = f.read() #читаем файл и проводим через функцию для выведения данных топ-5
         stats_text(text, top_n)
 
 def main():
@@ -44,14 +44,15 @@ def main():
     subparsers = parser.add_subparsers(dest="command")
 
     cat_parser = subparsers.add_parser("cat", help="Вывести содержимое файла")
-    cat_parser.add_argument("--input", required=True) 
+    cat_parser.add_argument("--input", required=True) #путь к файлу 
     cat_parser.add_argument("-n", action="store_true", help="Нумеровать строки")
 
     stats_parser = subparsers.add_parser("stats", help="Частоты слов")
-    stats_parser.add_argument("--input", required=True)
+    stats_parser.add_argument("--input", required=True) #путь к файлу
     stats_parser.add_argument("--top", type=int, default=5) 
 
-    args = parser.parse_args() 
+    args = parser.parse_args()  #преобразует sys.argv в объект args
+        
     if args.command == "cat":
         cat_command(args.input, args.n)
     elif args.command == "stats":
@@ -80,7 +81,7 @@ from cli_text import check_file
 
 def main():
     parser = argparse.ArgumentParser(description="Конвертеры данных")
-    sub = parser.add_subparsers(dest="command", required=True) 
+    sub = parser.add_subparsers(dest="command", required=True) #cозданtv подпарсерs для разных команд
     
     p1 = sub.add_parser("json2csv")
     p1.add_argument("--in", dest="input", required=True, help="Входной JSON файл")
@@ -94,11 +95,11 @@ def main():
     p3.add_argument("--in", dest="input", required=True, help="Входной CSV файл")
     p3.add_argument("--out", dest="output", required=True, help="Выходной XLSX файл")
     
-    args = parser.parse_args()
+    args = parser.parse_args()  #преобразует sys.argv в объект args
 
     
     if args.command == "json2csv":
-        if not check_file(args.input):
+        if not check_file(args.input): #проверка файла
             print(f"Ошибка: Файл {args.input} не существует или недоступен")
             sys.exit(1)
                 
