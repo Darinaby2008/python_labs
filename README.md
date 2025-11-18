@@ -1,5 +1,71 @@
 # Лабораторная работа №6
-##
+## Задание 1
+<pre><code>
+import sys
+import os
+import argparse
+from lib import stats_text
+
+def check_file(file_path: str) -> bool:
+    if not os.path.exists(file_path):
+        print(f"Ошибка: файл '{file_path}' не существует", file=sys.stderr)
+        return False
+    if not os.path.isfile(file_path):
+        print(f"Ошибка: '{file_path}' не является файлом", file=sys.stderr)
+        return False
+    return True
+
+def cat_command(input_file: str, number_lines: bool = False):
+    if not check_file(input_file):
+        sys.exit(1)
+        
+    with open(input_file, 'r', encoding='utf-8') as f:
+        for i, line in enumerate(f, 1): 
+            if number_lines:
+                print(f"{i:6d}  {line}", end='') 
+            else:
+                print(line, end='') 
+    
+
+def stats_command(input_file: str, top_n: int = 5):
+    if not check_file(input_file): 
+        sys.exit(1)
+    
+    if top_n <= 0:
+        print("Ошибка: значение --top должно быть положительным числом", file=sys.stderr)
+        sys.exit(1)
+    
+    with open(input_file, 'r', encoding='utf-8') as f:
+        text = f.read()
+        stats_text(text, top_n)
+
+def main():
+    parser = argparse.ArgumentParser(description="Лабораторная №6")
+    subparsers = parser.add_subparsers(dest="command")
+
+    cat_parser = subparsers.add_parser("cat", help="Вывести содержимое файла")
+    cat_parser.add_argument("--input", required=True) 
+    cat_parser.add_argument("-n", action="store_true", help="Нумеровать строки")
+
+    stats_parser = subparsers.add_parser("stats", help="Частоты слов")
+    stats_parser.add_argument("--input", required=True)
+    stats_parser.add_argument("--top", type=int, default=5) 
+
+    args = parser.parse_args() 
+    if args.command == "cat":
+        cat_command(args.input, args.n)
+    elif args.command == "stats":
+        stats_command(args.input, args.top)
+    else:
+        parser.print_help()
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
+</code></pre>
+# Вывод строк и частоты слов
+<img width="1280" height="671" alt="image" src="https://github.com/user-attachments/assets/92a1b47e-d774-44c8-b011-c2846cd11121" />
+
 
 
 
