@@ -1,5 +1,5 @@
 # Лабораторная работа №6
-## Задание 1
+## Задание №1 - cli_text.py
 <pre><code>
 import sys
 import os
@@ -63,11 +63,88 @@ def main():
 if __name__ == "__main__":
     main()
 </code></pre>
-# Вывод строк и частоты слов
+
+### Вывод строк и частоты слов
 <img width="1280" height="671" alt="image" src="https://github.com/user-attachments/assets/92a1b47e-d774-44c8-b011-c2846cd11121" />
 
+## Задание №2 - cli_convert.py
+<pre><code>
+import sys
+import argparse
+
+from lib import csv_to_xlsx
+from lib import json_to_csv
+from lib import csv_to_json
+from cli_text import check_file
 
 
+def main():
+    parser = argparse.ArgumentParser(description="Конвертеры данных")
+    sub = parser.add_subparsers(dest="command", required=True) 
+    
+    p1 = sub.add_parser("json2csv")
+    p1.add_argument("--in", dest="input", required=True, help="Входной JSON файл")
+    p1.add_argument("--out", dest="output", required=True, help="Выходной CSV файл")
+
+    p2 = sub.add_parser("csv2json")
+    p2.add_argument("--in", dest="input", required=True, help="Входной CSV файл")
+    p2.add_argument("--out", dest="output", required=True, help="Выходной JSON файл")
+
+    p3 = sub.add_parser("csv2xlsx")
+    p3.add_argument("--in", dest="input", required=True, help="Входной CSV файл")
+    p3.add_argument("--out", dest="output", required=True, help="Выходной XLSX файл")
+    
+    args = parser.parse_args()
+
+    
+    if args.command == "json2csv":
+        if not check_file(args.input):
+            print(f"Ошибка: Файл {args.input} не существует или недоступен")
+            sys.exit(1)
+                
+        json_to_csv(args.input, args.output)
+        print(f"Успешно: JSON -> CSV")
+            
+    elif args.command == "csv2json":
+        if not check_file(args.input):
+            print(f"Ошибка: Файл {args.input} не существует или недоступен")
+            sys.exit(1)
+                
+        csv_to_json(args.input, args.output)
+        print(f"Успешно: CSV -> JSON")
+            
+    elif args.command == "csv2xlsx":
+        if not check_file(args.input):
+            print(f"Ошибка: Файл {args.input} не существует или недоступен")
+            sys.exit(1)
+                
+        csv_to_xlsx(args.input, args.output)
+        print(f"Успешно: CSV -> XLSX")
+            
+    else:
+        print("Ошибка: Неизвестная команда")
+        sys.exit(1)
+    return 0
+        
+
+if __name__ == "__main__":
+    main()
+</code></pre>
+
+### Вывод JSON => CSV
+<img width="1280" height="96" alt="image" src="https://github.com/user-attachments/assets/469e6e8e-2a4f-43e7-b6c4-3b06d4d81652" />
+<img width="531" height="187" alt="image" src="https://github.com/user-attachments/assets/cdb212d9-dd9a-495d-8332-b306998003ac" />
+<img width="404" height="166" alt="image" src="https://github.com/user-attachments/assets/5cacb6f3-ee75-4dd1-bc66-55854fdd9038" />
+
+### Вывод CSV => JSON
+<img width="1280" height="101" alt="image" src="https://github.com/user-attachments/assets/12779514-88ea-4b57-992e-5565d2123378" />
+<img width="370" height="168" alt="image" src="https://github.com/user-attachments/assets/82b7a77d-e51d-441c-a394-2b2a5c6a5c10" />
+<img width="487" height="251" alt="image" src="https://github.com/user-attachments/assets/fb3b66df-9999-4ccd-a3fd-9d1588e1efe5" />
+
+### Вывод CSV => XLSX
+<img width="1280" height="88" alt="image" src="https://github.com/user-attachments/assets/7ea5d6ef-729a-4bf3-8d9e-1117f5aa90ff" />
+<img width="504" height="209" alt="image" src="https://github.com/user-attachments/assets/2ff33f23-6e62-48d6-ba89-aaade59acce4" />
+<img width="451" height="171" alt="image" src="https://github.com/user-attachments/assets/f98e7738-6396-4cce-b6fd-c8794bd80a01" />
 
 # Лабораторная работа №5
 ## Задание А - JSON ↔ CSV
