@@ -2,6 +2,7 @@ import os, csv, sys
 
 from openpyxl import Workbook
 
+
 def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
     if not os.path.exists(csv_path):
         print("FileNotFoundError")
@@ -19,7 +20,6 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
         for row in reader:
             ws.append(row)
 
-
     for column_cells in ws.columns:
         max_length = 0
         column_letter = column_cells[0].column_letter
@@ -32,21 +32,23 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
 
 import csv, json, sys, os
 
+
 def json_to_csv(json_path: str, csv_path: str) -> None:
     if not os.path.exists(json_path):
         print("FileNotFoundError")
     if os.path.getsize(json_path) == 0:
         print("1ValueError")
         sys.exit(1)
-    with open(json_path, 'r', encoding='utf-8') as json_file:
+    with open(json_path, "r", encoding="utf-8") as json_file:
         json_data = json.load(json_file)
         if not all(type(x) == dict for x in json_data):
             print("ValueError")
             sys.exit(1)
-    with open(csv_path, 'w', newline='', encoding='utf-8') as csvfile:
+    with open(csv_path, "w", newline="", encoding="utf-8") as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=json_data[0].keys())
         writer.writeheader()
         writer.writerows(json_data)
+
 
 def csv_to_json(csv_path: str, json_path: str) -> None:
     if not os.path.exists(csv_path):
@@ -55,7 +57,7 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
     if os.path.getsize(csv_path) == 0:
         print("3ValueError")
         sys.exit(1)
-    with open(csv_path, 'r', encoding='utf-8') as csvfile:
+    with open(csv_path, "r", encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
         header = next(reader, None)
         if not header:
@@ -63,8 +65,10 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
             sys.exit(1)
         reader = csv.DictReader(csvfile)
         data = list(reader)
-    with open(json_path, 'w', encoding='utf-8') as jsonfile:
+    with open(json_path, "w", encoding="utf-8") as jsonfile:
         json.dump(data, jsonfile, ensure_ascii=False, indent=4)
+
+
 def table(arr: list[tuple[str, int]], isTable: bool = True) -> str:
     if not arr:
         return "(нет данных)"
@@ -79,6 +83,8 @@ def table(arr: list[tuple[str, int]], isTable: bool = True) -> str:
         return s
     else:
         return "\n".join(f"{a[0]}: {a[1]}" for a in arr)
+
+
 def stats_text(text: str, n: int = 5):
     text = text.strip()
     tokens = normalize(text)
@@ -91,28 +97,27 @@ def stats_text(text: str, n: int = 5):
     top_n_words = sorted(freqs.items(), key=lambda x: (-x[1], x[0]))[:n]
     print(f"Топ-{n}:")
     print(table(top_n_words, True))
+
+
 import re
 from collections import Counter
+
+
 def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
     if casefold:
         text = text.casefold()
     if yo2e:
-        translation_table = str.maketrans({
-            'ё': 'е',
-            'Ё': 'Е'
-        })
+        translation_table = str.maketrans({"ё": "е", "Ё": "Е"})
         text = text.translate(translation_table)
-    translation_table_controls = str.maketrans({
-        '\t': ' ',
-        '\r': ' ',
-        '\n': ' ',
-        '\v': ' ',
-        '\f': ' '
-    })
+    translation_table_controls = str.maketrans(
+        {"\t": " ", "\r": " ", "\n": " ", "\v": " ", "\f": " "}
+    )
     text = text.translate(translation_table_controls)
-    text = ' '.join(text.split())
+    text = " ".join(text.split())
 
     return text
+
+
 def tokenize(text: str) -> list[str]:
     word = re.findall(r"[\w-]+", text)
     words = []
@@ -124,8 +129,12 @@ def tokenize(text: str) -> list[str]:
         if w:
             words.append(w)
     return words
+
+
 def count_freq(tokens: list[str]) -> dict[str, int]:
     freq = Counter(tokens)
     return dict(freq)
+
+
 def top_n(freqs: dict[str, int], n: int) -> list[tuple[str, int]]:
     return sorted(freqs.items(), key=lambda x: (-x[1], x[0]))[:n]
