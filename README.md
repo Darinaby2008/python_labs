@@ -280,7 +280,13 @@ def test_special_cases(tmp_path):
     csv_file.write_text(csv_content, encoding="utf-8")
     csv_to_json(str(csv_file), tmp_path / "special.json")
 </code></pre>
-
+## Задание C - стиль кода (black)
+<img width="916" height="325" alt="image" src="https://github.com/user-attachments/assets/88bc43a3-c547-4850-b97a-13dfb384aaa0" />
+## Дополнительное задание 
+<img width="1280" height="119" alt="image" src="https://github.com/user-attachments/assets/09308a02-70bc-4da6-9e9f-37c96ec02eb5" />
+<img width="1280" height="728" alt="image" src="https://github.com/user-attachments/assets/69bc0e38-ca67-4615-bf7d-2b6cca9c9cd0" />
+<img width="1280" height="652" alt="image" src="https://github.com/user-attachments/assets/65f34d46-cb32-4f9f-b574-e81ae45b1c7f" />
+<img width="1280" height="508" alt="image" src="https://github.com/user-attachments/assets/5b9f3e95-81ce-4a01-9cb4-c96248ded6eb" />
 
 # Лабораторная работа №6
 ## Задание №1 - cli_text.py
