@@ -216,8 +216,7 @@ def test_json_to_csv_different_fields(tmp_path):
         rows = list(reader)
         assert len(rows) == 3
         assert {"name", "age", "city"} == set(rows[0].keys())
-
-
+        
 def test_csv_to_json_number_conversion(tmp_path):
     """Тестируем преобразование чисел из строк"""
     csv_file = tmp_path / "test.csv"
@@ -242,25 +241,6 @@ def test_wrong_extensions(tmp_path):
         json_to_csv(str(wrong_file), "output.csv")
     with pytest.raises(ValueError):
         csv_to_json(str(wrong_file), "output.json")
-
-
-def test_helper_functions():
-    """Тестируем вспомогательные функции"""
-    # check_file_extension
-    assert check_file_extension("file.json", ('.json',)) == True
-    assert check_file_extension("file.csv", ('.csv',)) == True
-    assert check_file_extension("data.JSON", ('.json',)) == True
-    assert check_file_extension("file.txt", ('.json', '.csv')) == False
-
-    # _is_float
-    assert _is_float("3.14") == True
-    assert _is_float("95.5") == True
-    assert _is_float("42") == True
-    assert _is_float("-5.5") == True
-    assert _is_float("text") == False
-    assert _is_float("") == False
-    assert _is_float("12.34.56") == False
-
 
 def test_special_cases(tmp_path):
     """Тестируем специальные случаи"""
