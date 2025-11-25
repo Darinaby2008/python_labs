@@ -83,6 +83,7 @@ def test_count_freq(tokens, expected):
 def test_top_n(freq_dict, n, expected):
     assert top_n(freq_dict, n) == expected
 </code></pre>
+
 ## Задание B - test_json_csv.py
 <pre><code>
 import pytest
@@ -93,7 +94,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-from src.lab05.json_csv import json_to_csv, csv_to_json, check_file_extension, _is_float
+from src.lab05.json_csv import json_to_csv, csv_to_json
 
 
 def test_json_to_csv_simple(tmp_path):
@@ -215,8 +216,7 @@ def test_json_to_csv_different_fields(tmp_path):
         rows = list(reader)
         assert len(rows) == 3
         assert {"name", "age", "city"} == set(rows[0].keys())
-
-
+        
 def test_csv_to_json_number_conversion(tmp_path):
     """Тестируем преобразование чисел из строк"""
     csv_file = tmp_path / "test.csv"
@@ -242,25 +242,6 @@ def test_wrong_extensions(tmp_path):
     with pytest.raises(ValueError):
         csv_to_json(str(wrong_file), "output.json")
 
-
-def test_helper_functions():
-    """Тестируем вспомогательные функции"""
-    # check_file_extension
-    assert check_file_extension("file.json", ('.json',)) == True
-    assert check_file_extension("file.csv", ('.csv',)) == True
-    assert check_file_extension("data.JSON", ('.json',)) == True
-    assert check_file_extension("file.txt", ('.json', '.csv')) == False
-
-    # _is_float
-    assert _is_float("3.14") == True
-    assert _is_float("95.5") == True
-    assert _is_float("42") == True
-    assert _is_float("-5.5") == True
-    assert _is_float("text") == False
-    assert _is_float("") == False
-    assert _is_float("12.34.56") == False
-
-
 def test_special_cases(tmp_path):
     """Тестируем специальные случаи"""
     # Одна запись в JSON
@@ -281,6 +262,14 @@ def test_special_cases(tmp_path):
     csv_to_json(str(csv_file), tmp_path / "special.json")
 </code></pre>
 
+## Задание C - стиль кода (black)
+<img width="916" height="325" alt="image" src="https://github.com/user-attachments/assets/88bc43a3-c547-4850-b97a-13dfb384aaa0" />
+
+## Дополнительное задание 
+<img width="1280" height="728" alt="image" src="https://github.com/user-attachments/assets/69bc0e38-ca67-4615-bf7d-2b6cca9c9cd0" />
+<img width="1280" height="119" alt="image" src="https://github.com/user-attachments/assets/09308a02-70bc-4da6-9e9f-37c96ec02eb5" />
+<img width="1280" height="508" alt="image" src="https://github.com/user-attachments/assets/5b9f3e95-81ce-4a01-9cb4-c96248ded6eb" />
+<img width="1280" height="652" alt="image" src="https://github.com/user-attachments/assets/65f34d46-cb32-4f9f-b574-e81ae45b1c7f" />
 
 # Лабораторная работа №6
 ## Задание №1 - cli_text.py
