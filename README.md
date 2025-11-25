@@ -5,14 +5,13 @@ import sys
 import os
 import pytest
 
-# ДОБАВЛЯЕМ путь к папке src - это ОЧЕНЬ ВАЖНО!
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-# Теперь импортируем функции ПРАВИЛЬНО
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..")) #путь к папке src
+
 from src._lib_.text import normalize, tokenize, count_freq, top_n
 
 
-# Тесты для normalize
+#тесты для normalize
 @pytest.mark.parametrize(
     "source, expected",
     [
@@ -28,7 +27,7 @@ def test_normalize(source, expected):
     assert normalize(source) == expected
 
 
-# Тесты для tokenize
+#тесты для tokenize
 @pytest.mark.parametrize(
     "text, expected",
     [
@@ -43,7 +42,7 @@ def test_tokenize(text, expected):
     assert tokenize(text) == expected
 
 
-# Тесты для count_freq
+#тесты для count_freq
 @pytest.mark.parametrize(
     "tokens, expected",
     [
@@ -56,8 +55,7 @@ def test_count_freq(tokens, expected):
     assert count_freq(tokens) == expected
 
 
-# Тесты для top_n - ВАЖНО: проверяем сортировку при равной частоте!
-@pytest.mark.parametrize(
+#тесты для top_n 
     "freq_dict, n, expected",
     [
         # Обычный случай
