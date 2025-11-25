@@ -94,7 +94,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-from src.lab05.json_csv import json_to_csv, csv_to_json, check_file_extension, _is_float
+from src.lab05.json_csv import json_to_csv, csv_to_json
 
 
 def test_json_to_csv_simple(tmp_path):
