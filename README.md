@@ -1,75 +1,56 @@
 # Лабораторная работа №8
 ## Задание А - Реализовать класс Student (models.py)
-<pre><code>
-from dataclasses import dataclass
+<html>
+  <head>
+      from dataclasses import dataclass
 from datetime import datetime, date
-from typing import Dict, Any
 
-@dataclass # Декоратор, который автоматически генерирует методы __init__, __repr__, __eq__
-class Student: # Объявление класса Student
+
+@dataclass
+class Student:
     fio: str
     birthdate: str
     group: str
     gpa: float
 
     def __post_init__(self):
-        """Валидация данных после инициализации"""
         try:
-            datetime.strptime(self.birthdate, "%Y-%m-%d") #преобразование строки в дату ГГГГ-ММ-ДД
+            datetime.strptime(self.birthdate, "%Y-%m-%d")
         except ValueError:
-            raise ValueError(f"Invalid date format: {self.birthdate}. Use YYYY-MM-DD")
+            raise ValueError("warning: birthdate format might be invalid")
         
-        if not (0 <= self.gpa <= 5): #GPA в диапозоне от 0 до 5
-            raise ValueError(f"GPA must be between 0 and 5, got {self.gpa}")
+        if not (0 <= self.gpa <= 5):
+            raise ValueError("gpa must be between 0 and 5")
+
 
     def age(self) -> int:
-        """Вычисление возраста студента"""
-        birth_date = datetime.strptime(self.birthdate, "%Y-%m-%d").date() # Преобразование строки даты в объект date
+        bdate = datetime.strptime(self.birthdate, "%Y-%m-%d").date()
         today = date.today()
-        age = today.year - birth_date.year
-        
-        # Корректировка, если день рождения еще не наступил в этом году
-        if today.month < birth_date.month or (today.month == birth_date.month and today.day < birth_date.day):
-            age -= 1
-            
-        return age
+        return today.year - b.year - ((today.month, today.day) < (bdate.month, bdate.day))
 
-    def to_dict(self) -> Dict[str, Any]:
-        """Сериализация объекта в словарь"""
+    def to_dict(self) -> dict:
         return {
-            "fio": self.fio, # Ключ "fio" со значением ФИО студента
+            "fio": self.fio,
             "birthdate": self.birthdate,
+            "gpa": self.gpa,
             "group": self.group,
-            "gpa": self.gpa
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'Student':
-        """Десериализация объекта из словаря"""
+    def from_dict(cls, d: dict):
         return cls(
-            fio=data["fio"], # Передача ФИО из словаря
-            birthdate=data["birthdate"],
-            group=data["group"],
-            gpa=data["gpa"]
-        )
+            fio=d["fio"],
+            birthdate=d["birthdate"],
+            group=d["group"],
+            gpa=d["gpa"],
+    )
 
-    def __str__(self) -> str:
-        """Строковое представление объекта"""
-        return f"Студент: {self.fio}, Группа: {self.group}, GPA: {self.gpa}, Возраст: {self.age()} лет"
 
-if __name__ == "__main__":
-    try:
-        student = Student(
-            fio="Иванов Иван Иванович", # Аргумент: ФИО
-            birthdate="2000-05-15",
-            group="SE-01",
-            gpa=4.5
-        )
-        print(student)
-        print(f"Словарь: {student.to_dict()}")
-    except ValueError as e:
-        print(f"Ошибка: {e}")
-</code></pre>
+
+    def __str__(self):
+        return f"Student {self.fio},from {self.group},have {self.gpa}"
+  </head>
+</html>
 
 ## Задание B - Реализовать модуль serialize.py
 <pre><code>
