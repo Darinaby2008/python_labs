@@ -2,7 +2,7 @@
 ## Задание А - Реализовать класс Student (models.py)
 <html>
   <head>
-      from dataclasses import dataclass
+from dataclasses import dataclass
 from datetime import datetime, date
 
 
