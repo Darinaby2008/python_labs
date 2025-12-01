@@ -3,125 +3,99 @@
 <pre><code>
 from dataclasses import dataclass
 from datetime import datetime, date
-from typing import Dict, Any
 
-@dataclass # Декоратор, который автоматически генерирует методы __init__, __repr__, __eq__
-class Student: # Объявление класса Student
+
+@dataclass
+class Student:
     fio: str
     birthdate: str
     group: str
     gpa: float
 
     def __post_init__(self):
-        """Валидация данных после инициализации"""
         try:
-            datetime.strptime(self.birthdate, "%Y-%m-%d") #преобразование строки в дату ГГГГ-ММ-ДД
+            datetime.strptime(self.birthdate, "%Y-%m-%d")
         except ValueError:
-            raise ValueError(f"Invalid date format: {self.birthdate}. Use YYYY-MM-DD")
+            raise ValueError("warning: birthdate format might be invalid")
         
-        if not (0 <= self.gpa <= 5): #GPA в диапозоне от 0 до 5
-            raise ValueError(f"GPA must be between 0 and 5, got {self.gpa}")
+        if not (0 <= self.gpa <= 5):
+            raise ValueError("gpa must be between 0 and 5")
+
 
     def age(self) -> int:
-        """Вычисление возраста студента"""
-        birth_date = datetime.strptime(self.birthdate, "%Y-%m-%d").date() # Преобразование строки даты в объект date
+        bdate = datetime.strptime(self.birthdate, "%Y-%m-%d").date()
         today = date.today()
-        age = today.year - birth_date.year
-        
-        # Корректировка, если день рождения еще не наступил в этом году
-        if today.month < birth_date.month or (today.month == birth_date.month and today.day < birth_date.day):
-            age -= 1
-            
-        return age
+        return today.year - b.year - ((today.month, today.day) < (bdate.month, bdate.day))
 
-    def to_dict(self) -> Dict[str, Any]:
-        """Сериализация объекта в словарь"""
+    def to_dict(self) -> dict:
         return {
-            "fio": self.fio, # Ключ "fio" со значением ФИО студента
+            "fio": self.fio,
             "birthdate": self.birthdate,
+            "gpa": self.gpa,
             "group": self.group,
-            "gpa": self.gpa
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'Student':
-        """Десериализация объекта из словаря"""
+    def from_dict(cls, d: dict):
         return cls(
-            fio=data["fio"], # Передача ФИО из словаря
-            birthdate=data["birthdate"],
-            group=data["group"],
-            gpa=data["gpa"]
-        )
+            fio=d["fio"],
+            birthdate=d["birthdate"],
+            group=d["group"],
+            gpa=d["gpa"],
+    )
 
-    def __str__(self) -> str:
-        """Строковое представление объекта"""
-        return f"Студент: {self.fio}, Группа: {self.group}, GPA: {self.gpa}, Возраст: {self.age()} лет"
 
-if __name__ == "__main__":
-    try:
-        student = Student(
-            fio="Иванов Иван Иванович", # Аргумент: ФИО
-            birthdate="2000-05-15",
-            group="SE-01",
-            gpa=4.5
-        )
-        print(student)
-        print(f"Словарь: {student.to_dict()}")
-    except ValueError as e:
-        print(f"Ошибка: {e}")
+
+    def __str__(self):
+        return f"Student {self.fio},from {self.group},have {self.gpa}"
 </code></pre>
 
 ## Задание B - Реализовать модуль serialize.py
 <pre><code>
 import json
-from typing import List
 from models import Student
 
-def students_to_json(students: List[Student], path: str) -> None:
 
-    data = [student.to_dict() for student in students]  # Генератор списка: преобразуем каждый объект Student в словарь
-    
-    with open(path, 'w', encoding='utf-8') as f:
+def students_to_json(students, path):
+    data = [s.to_dict() for s in students]
+    with open(path, "w", encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-def students_from_json(path: str) -> List[Student]: #Десериализация списка студентов из JSON файла
-    try:
-        with open(path, 'r', encoding='utf-8') as f:
-            data = json.load(f) #Загрузка и парсинг JSON данных из файла в Python
-        
-        students = []
-        for item in data:
-            try:
-                student = Student.from_dict(item) # Создание объекта Student из словаря
-                students.append(student)
-            except (ValueError, KeyError) as e:
-                print(f"Ошибка при создании студента из данных {item}: {e}")
-                continue
-                
-        return students
-    except FileNotFoundError:
-        print(f"Файл {path} не найден")
-        return []
-    except json.JSONDecodeError:
-        print(f"Ошибка декодирования JSON из файла {path}")
-        return []
+def students_from_json(path):
+    with open(path, "r", encoding='utf-8') as f:
+        data = json.load(f)
 
-if __name__ == "__main__": # Проверка: запущен ли скрипт напрямую (
-    # Пример использования
-    students = [
-        Student("Иванов Иван", "2000-05-15", "SE-01", 4.5),
-        Student("Петрова Анна", "2001-08-22", "SE-02", 3.8),
-        Student("Сидоров Алексей", "1999-12-10", "SE-01", 4.2)
-    ]
-    
-    # Сериализация
-    students_to_json(students, "data/lab08/students_output.json")
-    
-    # Десериализация
-    loaded_students = students_from_json("data/lab08/students_input.json")
-    for student in loaded_students:
-        print(student)
+    if not isinstance(data, list):
+        raise TypeError
+
+    student_list = []
+    for d in data:
+        if not isinstance(d, dict):
+            raise TypeError
+        if not isinstance(d.get("fio"), str):
+            raise TypeError
+        if not isinstance(d.get("birthdate"), str):
+            raise TypeError
+        if not isinstance(d.get("group"), str):
+            raise TypeError
+        if not isinstance(d.get("gpa"), (float, int)):
+            raise TypeError
+
+        try:
+            student = Student.from_dict(d)
+        except Exception as e:
+            raise ValueError
+
+        student_list.append(student)
+
+    return student_list
+
+students_list = students_from_json('data/lab08/students_input.json')
+for item in students_list:
+    print(item)
 </code></pre>
+<img width="735" height="168" alt="image" src="https://github.com/user-attachments/assets/c87e8766-7fca-4f29-95b0-b6c067ebb2ed" />
+<img width="544" height="456" alt="image" src="https://github.com/user-attachments/assets/97f7b237-72a6-45cf-87bd-f4c0ca177e37" />
 
 # Лабораторная работа №7
 ## Задание A - test_text.py
