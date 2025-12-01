@@ -1,48 +1,41 @@
 import json
-from typing import List
 from models import Student
 
-def students_to_json(students: List[Student], path: str) -> None:
 
-    data = [student.to_dict() for student in students]  # Генератор списка: преобразуем каждый объект Student в словарь
-    
-    with open(path, 'w', encoding='utf-8') as f:
+def students_to_json(students, path):
+    data = [s.to_dict() for s in students]
+    with open(path, "w", encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-def students_from_json(path: str) -> List[Student]: #Десериализация списка студентов из JSON файла
-    try:
-        with open(path, 'r', encoding='utf-8') as f:
-            data = json.load(f) #Загрузка и парсинг JSON данных из файла в Python
-        
-        students = []
-        for item in data:
-            try:
-                student = Student.from_dict(item) # Создание объекта Student из словаря
-                students.append(student)
-            except (ValueError, KeyError) as e:
-                print(f"Ошибка при создании студента из данных {item}: {e}")
-                continue
-                
-        return students
-    except FileNotFoundError:
-        print(f"Файл {path} не найден")
-        return []
-    except json.JSONDecodeError:
-        print(f"Ошибка декодирования JSON из файла {path}")
-        return []
+def students_from_json(path):
+    with open(path, "r", encoding='utf-8') as f:
+        data = json.load(f)
 
-if __name__ == "__main__": # Проверка: запущен ли скрипт напрямую (
-    # Пример использования
-    students = [
-        Student("Иванов Иван", "2000-05-15", "SE-01", 4.5),
-        Student("Петрова Анна", "2001-08-22", "SE-02", 3.8),
-        Student("Сидоров Алексей", "1999-12-10", "SE-01", 4.2)
-    ]
-    
-    # Сериализация
-    students_to_json(students, "data/lab08/students_output.json")
-    
-    # Десериализация
-    loaded_students = students_from_json("data/lab08/students_input.json")
-    for student in loaded_students:
-        print(student)
+    if not isinstance(data, list):
+        raise TypeError
+
+    student_list = []
+    for d in data:
+        if not isinstance(d, dict):
+            raise TypeError
+        if not isinstance(d.get("fio"), str):
+            raise TypeError
+        if not isinstance(d.get("birthdate"), str):
+            raise TypeError
+        if not isinstance(d.get("group"), str):
+            raise TypeError
+        if not isinstance(d.get("gpa"), (float, int)):
+            raise TypeError
+
+        try:
+            student = Student.from_dict(d)
+        except Exception as e:
+            raise ValueError
+
+        student_list.append(student)
+
+    return student_list
+
+students_list = students_from_json('data/lab08/students_input.json')
+for item in students_list:
+    print(item)
