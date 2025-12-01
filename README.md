@@ -1,7 +1,6 @@
 # Лабораторная работа №8
 ## Задание А - Реализовать класс Student (models.py)
-<html>
-  <head>
+<pre><code>
 from dataclasses import dataclass
 from datetime import datetime, date
 
@@ -49,8 +48,7 @@ class Student:
 
     def __str__(self):
         return f"Student {self.fio},from {self.group},have {self.gpa}"
-  </head>
-</html>
+</code></pre>
 
 ## Задание B - Реализовать модуль serialize.py
 <pre><code>
