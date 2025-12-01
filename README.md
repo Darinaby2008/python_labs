@@ -5,14 +5,13 @@ import sys
 import os
 import pytest
 
-# ДОБАВЛЯЕМ путь к папке src - это ОЧЕНЬ ВАЖНО!
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-# Теперь импортируем функции ПРАВИЛЬНО
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..")) #путь к папке src
+
 from src._lib_.text import normalize, tokenize, count_freq, top_n
 
 
-# Тесты для normalize
+#тесты для normalize
 @pytest.mark.parametrize(
     "source, expected",
     [
@@ -28,7 +27,7 @@ def test_normalize(source, expected):
     assert normalize(source) == expected
 
 
-# Тесты для tokenize
+#тесты для tokenize
 @pytest.mark.parametrize(
     "text, expected",
     [
@@ -43,7 +42,7 @@ def test_tokenize(text, expected):
     assert tokenize(text) == expected
 
 
-# Тесты для count_freq
+#тесты для count_freq
 @pytest.mark.parametrize(
     "tokens, expected",
     [
@@ -56,8 +55,7 @@ def test_count_freq(tokens, expected):
     assert count_freq(tokens) == expected
 
 
-# Тесты для top_n - ВАЖНО: проверяем сортировку при равной частоте!
-@pytest.mark.parametrize(
+#тесты для top_n 
     "freq_dict, n, expected",
     [
         # Обычный случай
@@ -93,16 +91,19 @@ from pathlib import Path
 import sys
 import os
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..")) #путь к src
 from src.lab05.json_csv import json_to_csv, csv_to_json
 
 
 def test_json_to_csv_simple(tmp_path):
-    """Простая конвертация JSON → CSV"""
+    #простая конвертация JSON → CSV
     json_file = tmp_path / "test.json"
     csv_file = tmp_path / "test.csv"
 
-    test_data = [{"name": "Alice", "age": 22}, {"name": "Bob", "age": 25}]
+    test_data = [
+                 {"name": "Alice", "age": 22},    
+                 {"name": "Bob", "age": 25}
+    ]
 
     json_file.write_text(json.dumps(test_data), encoding="utf-8")
     json_to_csv(str(json_file), str(csv_file))
@@ -119,7 +120,7 @@ def test_json_to_csv_simple(tmp_path):
 
 
 def test_csv_to_json_simple(tmp_path):
-    """Простая конвертация CSV → JSON"""
+    #простая конвертация CSV → JSON
     csv_file = tmp_path / "test.csv"
     json_file = tmp_path / "test.json"
 
@@ -139,8 +140,11 @@ def test_csv_to_json_simple(tmp_path):
 
 
 def test_json_to_csv_roundtrip(tmp_path):
-    """Полный цикл конвертации"""
-    original_data = [{"name": "Alice", "age": 22}, {"name": "Bob", "age": 25}]
+    #полный цикл конвертации
+    original_data = [
+                      {"name": "Alice", "age": 22},
+                      {"name": "Bob", "age": 25}
+    ]
 
     original_json = tmp_path / "original.json"
     converted_csv = tmp_path / "converted.csv"
@@ -157,7 +161,7 @@ def test_json_to_csv_roundtrip(tmp_path):
 
 
 def test_file_not_found():
-    """Тестируем ошибку когда файл не существует"""
+    #тестируем ошибку когда файл не существует
     with pytest.raises(FileNotFoundError):
         json_to_csv("nonexistent.json", "output.csv")
     with pytest.raises(FileNotFoundError):
@@ -165,7 +169,7 @@ def test_file_not_found():
 
 
 def test_invalid_cases(tmp_path):
-    """Тестируем различные ошибочные случаи"""
+    #тестируем различные ошибочные случаи
     # Некорректный JSON
     json_file = tmp_path / "broken.json"
     json_file.write_text("{ invalid json }", encoding="utf-8")
@@ -196,7 +200,7 @@ def test_invalid_cases(tmp_path):
 
 
 def test_json_to_csv_different_fields(tmp_path):
-    """Тестируем JSON с разными полями в записях"""
+    #тестируем JSON с разными полями в записях
     json_file = tmp_path / "test.json"
     csv_file = tmp_path / "test.csv"
 
@@ -218,7 +222,7 @@ def test_json_to_csv_different_fields(tmp_path):
         assert {"name", "age", "city"} == set(rows[0].keys())
         
 def test_csv_to_json_number_conversion(tmp_path):
-    """Тестируем преобразование чисел из строк"""
+    #тестируем преобразование чисел из строк
     csv_file = tmp_path / "test.csv"
     json_file = tmp_path / "test.json"
 
@@ -233,7 +237,7 @@ def test_csv_to_json_number_conversion(tmp_path):
 
 
 def test_wrong_extensions(tmp_path):
-    """Тестируем неправильные расширения файлов"""
+    #тестируем неправильные расширения файлов
     wrong_file = tmp_path / "file.txt"
     wrong_file.write_text("some content", encoding="utf-8")
     
@@ -243,19 +247,19 @@ def test_wrong_extensions(tmp_path):
         csv_to_json(str(wrong_file), "output.json")
 
 def test_special_cases(tmp_path):
-    """Тестируем специальные случаи"""
-    # Одна запись в JSON
+    #тестируем специальные случаи
+    #одна запись в JSON
     json_file = tmp_path / "single.json"
     json_file.write_text(json.dumps([{"name": "Alice", "age": 25}]), encoding="utf-8")
     json_to_csv(str(json_file), tmp_path / "single.csv")
 
-    # Юникод символы
+    #юникод символы
     json_file = tmp_path / "unicode.json"
     test_data = [{"name": "Анна", "city": "Москва"}, {"name": "Böb", "city": "München"}]
     json_file.write_text(json.dumps(test_data, ensure_ascii=False), encoding="utf-8")
     json_to_csv(str(json_file), tmp_path / "unicode.csv")
 
-    # Специальные символы в CSV
+    #специальные символы в CSV
     csv_file = tmp_path / "special.csv"
     csv_content = 'name,comment\nAlice,"Text, with, commas"'
     csv_file.write_text(csv_content, encoding="utf-8")
