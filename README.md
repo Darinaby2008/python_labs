@@ -62,6 +62,7 @@ if __name__ == "__main__":
     except ValueError:
         raise ValueError("Ошибка")
 </code></pre>
+<img width="1280" height="221" alt="image" src="https://github.com/user-attachments/assets/ec0a8422-a18e-4458-85fc-8e072d41b5f1" />
 
 ## Задание B - Реализовать модуль serialize.py
 <pre><code>
@@ -135,7 +136,8 @@ if __name__ == "__main__":
     
     print("=== Тест завершён ===")
 </code></pre>
-
+<img width="1123" height="451" alt="image" src="https://github.com/user-attachments/assets/43e9f1ee-e15d-4d5d-9c87-87eea8a1dcf8" />
+<img width="517" height="596" alt="image" src="https://github.com/user-attachments/assets/88a01e03-f106-4e0f-827f-55707d04c118" />
 
 # Лабораторная работа №7
 ## Задание A - test_text.py
