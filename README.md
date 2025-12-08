@@ -94,8 +94,7 @@ students_list = students_from_json('data/lab08/students_input.json')
 for item in students_list:
     print(item)
 </code></pre>
-<img width="735" height="168" alt="image" src="https://github.com/user-attachments/assets/c87e8766-7fca-4f29-95b0-b6c067ebb2ed" />
-<img width="544" height="456" alt="image" src="https://github.com/user-attachments/assets/97f7b237-72a6-45cf-87bd-f4c0ca177e37" />
+
 
 # Лабораторная работа №7
 ## Задание A - test_text.py
