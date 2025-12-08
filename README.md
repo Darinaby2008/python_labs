@@ -48,51 +48,92 @@ class Student:
 
     def __str__(self):
         return f"Student {self.fio},from {self.group},have {self.gpa}"
+            
+if __name__ == "__main__":
+    try:
+        student = Student(
+            fio="Иванов Иван Иванович",
+            birthdate="2000-05-15",
+            group="SE-01",
+            gpa=4.5
+        )
+        print(student)
+        print(f"Словарь: {student.to_dict()}")
+    except ValueError:
+        raise ValueError("Ошибка")
 </code></pre>
 
 ## Задание B - Реализовать модуль serialize.py
 <pre><code>
 import json
+import os
+from typing import List
 from models import Student
 
-
-def students_to_json(students, path):
-    data = [s.to_dict() for s in students]
-    with open(path, "w", encoding='utf-8') as f:
+def students_to_json(students: List[Student], path: str) -> None:
+    data = [student.to_dict() for student in students]
+    
+    os.makedirs(os.path.dirname(path), exist_ok=True) # Создаём папки если их нет
+    
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-def students_from_json(path):
-    with open(path, "r", encoding='utf-8') as f:
-        data = json.load(f)
-
-    if not isinstance(data, list):
-        raise TypeError
-
-    student_list = []
-    for d in data:
-        if not isinstance(d, dict):
-            raise TypeError
-        if not isinstance(d.get("fio"), str):
-            raise TypeError
-        if not isinstance(d.get("birthdate"), str):
-            raise TypeError
-        if not isinstance(d.get("group"), str):
-            raise TypeError
-        if not isinstance(d.get("gpa"), (float, int)):
-            raise TypeError
-
-        try:
-            student = Student.from_dict(d)
-        except Exception as e:
-            raise ValueError
-
-        student_list.append(student)
-
-    return student_list
-
-students_list = students_from_json('data/lab08/students_input.json')
-for item in students_list:
-    print(item)
+def students_from_json(path: str) -> List[Student]:
+    
+    try: #Загружает список студентов из JSON файла
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        
+        students = []
+        for item in data:
+            try:
+                student = Student.from_dict(item)
+                students.append(student)
+            except (ValueError, KeyError) as e:
+                print(f"Ошибка при создании студента: {e}")
+                continue
+                
+        return students
+    except FileNotFoundError:
+        print(f"Файл не найден: {path}")
+        return []
+    except json.JSONDecodeError:
+        print(f"Ошибка декодирования JSON: {path}")
+        return []
+    
+if __name__ == "__main__":
+    print("=== Тест ЛР8 ===")
+    
+    # 1. Создаём студентов
+    students = [
+        Student("Иванов Иван Иванович", "2000-05-15", "SE-01", 4.5),
+        Student("Петрова Анна Сергеевна", "2001-08-22", "SE-02", 3.8),
+        Student("Сидоров Алексей Борисович", "1999-12-10", "SE-01", 4.2)
+    ]
+    
+    print("1. Создано 3 студента")
+    for s in students:
+        print(f"   - {s}")
+    
+    # 2. Сохраняем в data/lab08/
+    output_path = "data/lab08/students_output.json"
+    students_to_json(students, output_path)
+    print(f"2. Сохранено в: {output_path}")
+    
+    # 3. Загружаем из data/lab08/
+    input_path = "data/lab08/students_input.json"
+    print(f"3. Загружаем из: {input_path}")
+    
+    if os.path.exists(input_path):
+        loaded_students = students_from_json(input_path)
+        print(f"   Загружено студентов: {len(loaded_students)}")
+        for s in loaded_students:
+            print(f"   - {s}")
+    else:
+        print(f"   Файл {input_path} не найден!")
+        print("   Создайте его с данными студентов")
+    
+    print("=== Тест завершён ===")
 </code></pre>
 
 
