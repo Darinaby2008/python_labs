@@ -5,16 +5,16 @@ from dataclasses import dataclass
 from datetime import datetime, date
 
 
-@dataclass
+@dataclass #делает так, чтобы Python сам создавал конструктор и методы и тд
 class Student:
     fio: str
     birthdate: str
     group: str
     gpa: float
 
-    def __post_init__(self):
+    def __post_init__(self): #проверка корректности данных
         try:
-            datetime.strptime(self.birthdate, "%Y-%m-%d")
+            datetime.strptime(self.birthdate, "%Y-%m-%d") #преобразует строку в объект даты по формату
         except ValueError:
             raise ValueError("Неправильный формат даты рождения")
         
@@ -25,7 +25,7 @@ class Student:
     def age(self) -> int:
         bdate = datetime.strptime(self.birthdate, "%Y-%m-%d").date()
         today = date.today()
-        return today.year - b.year - ((today.month, today.day) < (bdate.month, bdate.day))
+        return today.year - b.year - ((today.month, today.day) < (bdate.month, bdate.day)) #если др не наступило, то -1 год
 
     def to_dict(self) -> dict:
         return {
@@ -35,7 +35,7 @@ class Student:
             "group": self.group,
         }
 
-    @classmethod
+    @classmethod #метод, работающий с классом, а не с корректным объектом
     def from_dict(cls, d: dict):
         return cls(
             fio=d["fio"],
