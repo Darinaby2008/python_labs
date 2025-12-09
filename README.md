@@ -16,10 +16,10 @@ class Student:
         try:
             datetime.strptime(self.birthdate, "%Y-%m-%d")
         except ValueError:
-            raise ValueError("warning: birthdate format might be invalid")
+            raise ValueError("Неправильный формат даты рождения")
         
         if not (0 <= self.gpa <= 5):
-            raise ValueError("gpa must be between 0 and 5")
+            raise ValueError("Средний балл должен быть от 0 до 5")
 
 
     def age(self) -> int:
