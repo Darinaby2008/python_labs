@@ -74,16 +74,34 @@ if __name__ == "__main__":
 </code></pre>
 ### list()
 <pre><code>
-print(group.list())
+    print(group.list())
 </code></pre>
 <img width="1280" height="145" alt="image" src="https://github.com/user-attachments/assets/904f7532-f96a-4474-9de7-148f98c396eb" />
+
 ### add()
 <pre><code>
     print(group.add(student('Быкова Дарина', '2008-01-20', 'БИВТ-25-5', 4.8)))
 </code></pre>
 <img width="1280" height="218" alt="image" src="https://github.com/user-attachments/assets/97d34275-536a-46e5-8631-8bce9fd291cf" />
+<img width="698" height="376" alt="image" src="https://github.com/user-attachments/assets/b4b04581-664e-450a-8d59-c78214bd3156" />
 
+## find()
+<pre><code>
+    print(group.find('Зайцева Ольга'))
+</code></pre>
+<img width="1280" height="172" alt="image" src="https://github.com/user-attachments/assets/45af74ae-7eb7-42f6-ab97-f86cf0119f41" />
 
+## remove()
+<pre><code>
+   print(group.remove('Зайцева Ольга')) 
+</code></pre>
+<img width="1280" height="142" alt="image" src="https://github.com/user-attachments/assets/e3a861e8-f96b-4b58-9000-9d02fd803ed3" />
+
+## update()
+<pre><code>
+    print(group.update('Новиков Сергей', **{'birthdate': '2007.06.24', 'group': 'БИВТ-31-4', 'gpa': 3.8}))
+</code></pre>
+<img width="663" height="316" alt="image" src="https://github.com/user-attachments/assets/492b67b2-af9c-434c-ace9-f0ec4fea62cc" />
 
 # Лабораторная работа №8
 ## Задание А - Реализовать класс Student (models.py)
