@@ -1,3 +1,108 @@
+# Лабораторная работа №9
+## Задание А - Реализовать класс Group (group.py)
+<pre><code>
+import csv
+from pathlib import Path
+from typing import List
+import sys
+import os
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, project_root)
+
+from src.lab08.models import Student
+
+class Group:
+    def __init__(self, storage_path: str):
+        self.path = Path(storage_path)
+        if not self.path.exists():
+            self.path.write_text("", encoding="utf-8")
+
+    def __read_all(self) -> List[dict]:
+        with self.path.open('r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            return [row for row in reader]
+
+    def list(self) -> List[Student]:
+        rows = self.__read_all()
+        return [Student(r["fio"], r["birthdate"], r["group"], float(r["gpa"])) for r in rows]
+
+    def add(self, student: Student):
+        rows = self.__read_all()
+        rows.append({
+            "fio": student.fio,
+            "birthdate": student.birthdate,
+            "group": student.group,
+            "gpa": str(student.gpa)
+        })
+        with self.path.open('w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=["fio", "birthdate", "group", "gpa"])
+            writer.writeheader()
+            writer.writerows(rows)
+
+    def find(self, substr: str) -> List[Student]:
+        rows = self.__read_all()
+        found = [r for r in rows if substr in r["fio"]]
+        return [Student(r["fio"], r["birthdate"], r["group"], float(r["gpa"])) for r in found]
+
+    def remove(self, fio: str):
+        rows = self.__read_all()
+        for i, r in enumerate(rows):
+            if r["fio"] == fio:
+                rows.pop(i)
+                break
+        with self.path.open('w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=["fio", "birthdate", "group", "gpa"])
+            writer.writeheader()
+            writer.writerows(rows)
+
+    def update(self, fio: str, **fields):
+        rows = self.__read_all()
+        for r in rows:
+            if r["fio"] == fio:
+                for key, value in fields.items():
+                    if key in ["fio", "birthdate", "group", "gpa"]:
+                        r[key] = str(value)
+                break
+        with self.path.open('w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=["fio", "birthdate", "group", "gpa"])
+            writer.writeheader()
+            writer.writerows(rows)
+
+if __name__ == "__main__":
+    group = Group(r'C:\Users\darin\Documents\GitHub\python_labs\data\lab09\students.csv')
+    print(group.update('Новиков Сергей', **{'birthdate': '2007.06.24', 'group': 'БИВТ-31-4', 'gpa': 3.8}))
+</code></pre>
+### list()
+<pre><code>
+    print(group.list())
+</code></pre>
+<img width="1280" height="145" alt="image" src="https://github.com/user-attachments/assets/904f7532-f96a-4474-9de7-148f98c396eb" />
+
+### add()
+<pre><code>
+    print(group.add(student('Быкова Дарина', '2008-01-20', 'БИВТ-25-5', 4.8)))
+</code></pre>
+<img width="1280" height="218" alt="image" src="https://github.com/user-attachments/assets/97d34275-536a-46e5-8631-8bce9fd291cf" />
+<img width="698" height="376" alt="image" src="https://github.com/user-attachments/assets/b4b04581-664e-450a-8d59-c78214bd3156" />
+
+## find()
+<pre><code>
+    print(group.find('Зайцева Ольга'))
+</code></pre>
+<img width="1280" height="172" alt="image" src="https://github.com/user-attachments/assets/45af74ae-7eb7-42f6-ab97-f86cf0119f41" />
+
+## remove()
+<pre><code>
+   print(group.remove('Зайцева Ольга')) 
+</code></pre>
+<img width="1280" height="142" alt="image" src="https://github.com/user-attachments/assets/e3a861e8-f96b-4b58-9000-9d02fd803ed3" />
+
+## update()
+<pre><code>
+    print(group.update('Новиков Сергей', **{'birthdate': '2007.06.24', 'group': 'БИВТ-31-4', 'gpa': 3.8}))
+</code></pre>
+<img width="663" height="316" alt="image" src="https://github.com/user-attachments/assets/492b67b2-af9c-434c-ace9-f0ec4fea62cc" />
+
 # Лабораторная работа №8
 ## Задание А - Реализовать класс Student (models.py)
 <pre><code>
