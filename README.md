@@ -237,7 +237,7 @@ sys.path.insert(0, project_root)
 
 from src.lab08.models import Student
 
-class Group: #простое хранени, простота, читаемость, работает с объектами Student, а не со словарями
+class Group: #создает и проверяет, работает с объектами Student, а не со словарями
     def __init__(self, storage_path: str): #метод-конструктор, вызывается при создании объекта GROUP
         self.path = Path(storage_path) #создаем объект из переданнгопути и сохраняем его как атрибут 
         if not self.path.exists():
