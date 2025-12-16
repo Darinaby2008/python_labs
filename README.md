@@ -221,7 +221,8 @@ lst = SinglyLinkedList()
 lst.append(1)
 lst.append(2)
 lst.prepend(0)
-print(list(lst))  # [0, 1, 2]
+print(list(lst))  # [0, 1, 2] python'''
+
 # Лабораторная работа №9
 ## Задание А - Реализовать класс Group (group.py)
 <pre><code>
