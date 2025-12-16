@@ -203,7 +203,7 @@ class SinglyLinkedList:
 
 ## Примеры использования
 
-```python
+<pre><code>
 # Стек
 stack = Stack()
 stack.push(1)
@@ -221,7 +221,8 @@ lst = SinglyLinkedList()
 lst.append(1)
 lst.append(2)
 lst.prepend(0)
-print(list(lst))  # [0, 1, 2] python'''
+print(list(lst))  # [0, 1, 2]
+</code></pre>
 
 # Лабораторная работа №9
 ## Задание А - Реализовать класс Group (group.py)
