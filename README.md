@@ -237,23 +237,23 @@ sys.path.insert(0, project_root)
 
 from src.lab08.models import Student
 
-class Group:
-    def __init__(self, storage_path: str):
-        self.path = Path(storage_path)
+class Group: #простое хранени, простота, читаемость, работает с объектами Student, а не со словарями
+    def __init__(self, storage_path: str): #метод-конструктор, вызывается при создании объекта GROUP
+        self.path = Path(storage_path) #создаем объект из переданнгопути и сохраняем его как атрибут 
         if not self.path.exists():
             self.path.write_text("", encoding="utf-8")
 
-    def __read_all(self) -> List[dict]:
+    def __read_all(self) -> List[dict]: #функция для чтения всех данных из CSV-файла
         with self.path.open('r', encoding='utf-8') as f:
             reader = csv.DictReader(f)
             return [row for row in reader]
 
-    def list(self) -> List[Student]:
+    def list(self) -> List[Student]: #метода для получения списка всех студентов
         rows = self.__read_all()
         return [Student(r["fio"], r["birthdate"], r["group"], float(r["gpa"])) for r in rows]
 
-    def add(self, student: Student):
-        rows = self.__read_all()
+    def add(self, student: Student): #метод для добавления нового студента
+        rows = self.__read_all() #читаем текущие данные
         rows.append({
             "fio": student.fio,
             "birthdate": student.birthdate,
@@ -265,12 +265,12 @@ class Group:
             writer.writeheader()
             writer.writerows(rows)
 
-    def find(self, substr: str) -> List[Student]:
+    def find(self, substr: str) -> List[Student]: #метода для поиска студентов по подстроке в ФИО
         rows = self.__read_all()
         found = [r for r in rows if substr in r["fio"]]
         return [Student(r["fio"], r["birthdate"], r["group"], float(r["gpa"])) for r in found]
 
-    def remove(self, fio: str):
+    def remove(self, fio: str): #метод для удаления студента по ФИО
         rows = self.__read_all()
         for i, r in enumerate(rows):
             if r["fio"] == fio:
@@ -281,7 +281,7 @@ class Group:
             writer.writeheader()
             writer.writerows(rows)
 
-    def update(self, fio: str, **fields):
+    def update(self, fio: str, **fields): #метод для обновления данных студентов
         rows = self.__read_all()
         for r in rows:
             if r["fio"] == fio:
