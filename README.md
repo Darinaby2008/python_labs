@@ -1,35 +1,35 @@
 ## Лабораторная работа №10
 # Задание А - Реализовать Stack и Queue (structures.py)
 <pre><code>
-    from collections import deque
-class Stack:
+from collections import deque
+class Stack: #структура данных "стек", которая работает по принципу LIFO(последним пришел,первым ушел)
     def __init__(self):
         self._data = []
 
-    def push(self, item):
+    def push(self, item): #метод для жобавления элемента в стек
         self._data.append(item)
 
-    def pop(self):
+    def pop(self): #метод для удаления и возврата верхнего стека
         if self.is_empty():
             raise IndexError("pop from empty stack")
         return self._data.pop()
 
-    def peek(self):
+    def peek(self): #метод для просмотра верхнего элемента без его удаления
         if self.is_empty():
             return None
         return self._data[-1]
 
-    def is_empty(self) -> bool:
+    def is_empty(self) -> bool: #метод для проверки, пуст ли стек
         return len(self._data) == 0
     
-class Queue:
+class Queue: #Очередь FIFO
     def __init__(self):
         self._data = deque()
 
-    def enqueue(self, item):
+    def enqueue(self, item): #добавление элемента в очередь
         self._data.append(item)
 
-    def dequeue(self):
+    def dequeue(self): #удаление и возврат первого элемента очереди
         if self.is_empty():
             raise IndexError("dequeue from empty queue")
         return self._data.popleft()
@@ -45,18 +45,18 @@ class Queue:
 
 ## Задание B - Реализовать SinglyLinkedList (linked_list.py)
 <pre><code>
-    class Node:
+class Node: #узел-базовый элемент связаного списка
     def __init__(self, value, next=None):
         self.value = value
         self.next = next
 
-class SinglyLinkedList:
+class SinglyLinkedList: #Односвязный список
     def __init__(self):
         self.head = None
         self._size = 0
         self.tail = None
 
-    def append(self, value):
+    def append(self, value): #добавляем новый узел в конец списка
         new_node = Node(value)
 
         if self.head is None:
@@ -68,7 +68,7 @@ class SinglyLinkedList:
 
         self._size += 1
 
-    def prepend(self, value):
+    def prepend(self, value): #добавляет в начало списка
         new_node = Node(value, next=self.head)
         self.head = new_node
 
@@ -77,7 +77,7 @@ class SinglyLinkedList:
 
         self._size += 1
 
-    def insert(self, idx, value):
+    def insert(self, idx, value): #вставка по индексу(на определенную позиции)
         if idx < 0 or idx > self._size:
             raise IndexError(f"Index {idx} out of range [0, {self._size}]")
 
@@ -94,7 +94,7 @@ class SinglyLinkedList:
             current.next = new_node
             self._size += 1
 
-    def remove(self, value):
+    def remove(self, value): #удаляет первый узел с указанными значениями
         if self.head is None:
             return
 
@@ -115,7 +115,7 @@ class SinglyLinkedList:
                 return
             current = current.next
 
-    def remove_at(self, idx):
+    def remove_at(self, idx): #удаляет по индексу
         if idx < 0 or idx >= self._size:
             raise IndexError(f"Index {idx} out of range [0, {self._size})")
 
@@ -134,7 +134,7 @@ class SinglyLinkedList:
 
         self._size -= 1
 
-    def __iter__(self):
+    def __iter__(self): #vtnjl lkz bnthfwbb gj cgbcre
         current = self.head
         while current is not None:
             yield current.value
@@ -143,7 +143,7 @@ class SinglyLinkedList:
     def __len__(self):
         return self._size
 
-    def __repr__(self):
+    def __repr__(self): #метод для строкового предастовление списка
         values = list(self)
         return f"SinglyLinkedList({values})"
 </code></pre>
@@ -294,7 +294,7 @@ class Group: #простое хранени, простота, читаемос�
             writer.writeheader()
             writer.writerows(rows)
 
-if __name__ == "__main__":
+if __name__ == "__main__": #условие проверяет, запущен ли файл напрмую, а не импортирован как модуль
     group = Group(r'C:\Users\darin\Documents\GitHub\python_labs\data\lab09\students.csv')
     print(group.update('Новиков Сергей', **{'birthdate': '2007.06.24', 'group': 'БИВТ-31-4', 'gpa': 3.8}))
 </code></pre>
